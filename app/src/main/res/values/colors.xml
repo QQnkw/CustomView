@@ -7,4 +7,29 @@
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="app_white_fff">#fff</color>
     <color name="app_gray_F6F7FA">#F6F7FA</color>
+    <!--不透明 100% FF
+    95% F2
+    90% E6
+    85% D9
+    80% CC
+    75% BF
+    70% B3
+    65% A6
+    60% 99
+    55% 8C
+    半透明 50% 80
+    45% 73
+    40% 66
+    35% 59
+    30% 4D
+    25% 40
+    20% 33
+    15% 26
+    10% 1A
+    5% 0D
+    全透明 0% 00-->
+    <color name="app_30transparent">#4d000000</color>
+    <color name="app_black_2A2A2A">#2A2A2A</color>
+    <color name="app_gray_F1F1F1">#F1F1F1</color>
+    <color name="app_red_FF0000">#FF0000</color>
 </resources>

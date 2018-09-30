@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_corner4_bg_white"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_19">
+
+    <TextView
+        android:id="@+id/tv_top"
+        style="@style/Layout_Match_Wrap"
+        android:textColor="@color/app_black_2A2A2A"
+        android:textSize="@dimen/sp_14"
+        android:text="根据按钮位置进行动画，箭头宽度和按钮宽度一致"
+        />
+
+    <View
+        style="@style/Layout_Match_Wrap"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginTop="@dimen/dp_11"
+        android:background="@color/app_gray_F1F1F1"
+        />
+
+    <TextView
+        android:id="@+id/tv_mide"
+        style="@style/Layout_Match_Wrap"
+        android:layout_marginTop="@dimen/dp_11"
+        android:text="copy_comment_to_clipboard"
+        android:textColor="@color/app_black_2A2A2A"
+        android:textSize="@dimen/sp_14"
+        />
+
+    <View
+        android:id="@+id/line_down"
+        style="@style/Layout_Match_Wrap"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginTop="@dimen/dp_11"
+        android:background="@color/app_gray_F1F1F1"
+        />
+
+    <TextView
+        android:id="@+id/tv_down"
+        style="@style/Layout_Match_Wrap"
+        android:layout_marginTop="@dimen/dp_11"
+        android:textColor="@color/app_red_FF0000"
+        android:textSize="@dimen/sp_14"
+        android:text="Delete"
+        />
+</LinearLayout>

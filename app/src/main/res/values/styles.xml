@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Layout_Match_Wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Layout_Wrap_Wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="popp_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_popup_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_popup_out</item>
+    </style>
 </resources>

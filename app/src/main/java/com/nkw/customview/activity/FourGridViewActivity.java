@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.nkw.customview.R;
 import com.nkw.customview.comment.AppLocalData;
 import com.nkw.customview.utils.GlideUtils;
 import com.nkw.customview.view.fourGridView.VyFourGridView;
+import com.nkw.customview.view.popupwindow.PopWindowAboutPost;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,10 +50,12 @@ public class FourGridViewActivity extends AppCompatActivity {
 
         private final Random  mRandom;
         private final Context mContext;
+        private final PopWindowAboutPost mPopWindowAboutPost;
 
         public FourGridViewAdapter(Context context) {
             mRandom = new Random();
             mContext = context;
+            mPopWindowAboutPost = new PopWindowAboutPost((FourGridViewActivity) context);
         }
 
         @NonNull
@@ -82,6 +86,12 @@ public class FourGridViewActivity extends AppCompatActivity {
                 }
             });
             holder.mMultiImageLayout.setImages(imgList);*/
+           holder.mBtn.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   mPopWindowAboutPost.showPopup(v);
+               }
+           });
         }
 
         @Override
@@ -94,13 +104,15 @@ public class FourGridViewActivity extends AppCompatActivity {
 
         private TextView         mTv;
         private VyFourGridView   mFourGridView;
-//        private MultiImageLayout mMultiImageLayout;
+        private final Button mBtn;
+        //        private MultiImageLayout mMultiImageLayout;
 
         public FourGridViewHolder(View itemView) {
             super(itemView);
             mTv = itemView.findViewById(R.id.tv);
             mFourGridView = itemView.findViewById(R.id.four_grid_view);
 //            mMultiImageLayout = itemView.findViewById(R.id.multiImageLayout);
+            mBtn = itemView.findViewById(R.id.btn);
         }
     }
 }

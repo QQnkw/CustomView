@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:background="@color/app_white_fff"
-    android:layout_marginTop="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@color/app_white_fff"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="123124234324"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv"
+            style="@style/Layout_Wrap_Wrap"
+            android:text="123124234324"
+            android:textSize="@dimen/sp_18"/>
+
+        <Button
+            android:layout_marginEnd="@dimen/dp_20"
+            android:id="@+id/btn"
+            style="@style/Layout_Wrap_Wrap"
+            android:layout_width="50dp"
+            android:layout_alignParentRight="true"
+            android:text="pop"
+            android:textSize="@dimen/sp_10"/>
+    </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NKW"/>
+        android:text="NKW"
+        android:textSize="@dimen/sp_18"/>
 
     <com.nkw.customview.view.fourGridView.VyFourGridView
         android:id="@+id/four_grid_view"
