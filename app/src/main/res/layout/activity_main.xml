@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -76,4 +76,15 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="RefreshLikeIOSView"
+        android:textStyle="bold"/>
+    <Button
+        android:id="@+id/btn_four_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FourGridView"/>
 </LinearLayout>

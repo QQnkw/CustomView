@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="123124234324"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NKW"/>
+
+    <com.nkw.customview.view.fourGridView.VyFourGridView
+        android:id="@+id/four_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.nkw.customview.view.fourGridView.VyFourGridView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CF"/>
+
+    <com.nkw.customview.view.MultiImageLayout
+        android:id="@+id/multiImageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.nkw.customview.view.MultiImageLayout>
+</LinearLayout>

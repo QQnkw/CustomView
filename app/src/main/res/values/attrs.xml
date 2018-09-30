@@ -44,4 +44,12 @@
         <attr name="pstsShouldExpand" format="boolean" />
         <attr name="pstsTextAllCaps" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="MultiImageLayout">
+        <attr name="layout_mode">
+            <enum name="custom" value="0" />
+            <enum name="grid" value="1" />
+        </attr>
+        <attr name="wh_ratio" format="float" />
+    </declare-styleable>
 </resources>

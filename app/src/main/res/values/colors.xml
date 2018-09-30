@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="app_purple_6445F3">#6445F3</color>
     <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="app_white_fff">#fff</color>
 </resources>

@@ -1,23 +1,37 @@
-package com.nkw.customview;
+package com.nkw.customview.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
+import com.nkw.customview.R;
 import com.nkw.customview.view.RefreshLikeIOSView;
 import com.nkw.customview.view.TabLayoutVY;
 
 public class MainActivity extends AppCompatActivity {
     private Handler mHandler = new Handler();
     private int     mNum     = 0;
+    private MainActivity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mContext = this;
         tablayout();
         likeIOSRefreshView();
+        fourGridView();
+    }
+
+    private void fourGridView() {
+        findViewById(R.id.btn_four_grid_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FourGridViewActivity.startActivity(mContext);
+            }
+        });
     }
 
     private void likeIOSRefreshView() {
