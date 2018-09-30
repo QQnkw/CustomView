@@ -52,4 +52,8 @@
         </attr>
         <attr name="wh_ratio" format="float" />
     </declare-styleable>
+    <declare-styleable name="VyLoading">
+        <attr name="arcWidth" format="dimension" />
+        <attr name="arcColor" format="color" />
+    </declare-styleable>
 </resources>

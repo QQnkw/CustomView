@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.nkw.customview.R;
 import com.nkw.customview.comment.AppLocalData;
 import com.nkw.customview.utils.GlideUtils;
-import com.nkw.customview.view.MultiImageLayout;
 import com.nkw.customview.view.fourGridView.VyFourGridView;
 
 import java.util.Arrays;
@@ -58,7 +57,7 @@ public class FourGridViewActivity extends AppCompatActivity {
         @NonNull
         @Override
         public FourGridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_four_img, null, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_four_img, parent, false);
             return new FourGridViewHolder(view);
         }
 
@@ -75,14 +74,14 @@ public class FourGridViewActivity extends AppCompatActivity {
                 }
             });
             holder.mTv.setText(imgList.size() + "");
-            holder.mMultiImageLayout.setDisplayCount(imgList.size());
+           /* holder.mMultiImageLayout.setDisplayCount(imgList.size());
             holder.mMultiImageLayout.setAdapter(new MultiImageLayout.Adapter() {
                 @Override
                 public void loadImage(int position, int total, String path, ImageView iv) {
                     GlideUtils.loadImage(mContext, path, iv);
                 }
             });
-            holder.mMultiImageLayout.setImages(imgList);
+            holder.mMultiImageLayout.setImages(imgList);*/
         }
 
         @Override
@@ -95,13 +94,13 @@ public class FourGridViewActivity extends AppCompatActivity {
 
         private TextView         mTv;
         private VyFourGridView   mFourGridView;
-        private MultiImageLayout mMultiImageLayout;
+//        private MultiImageLayout mMultiImageLayout;
 
         public FourGridViewHolder(View itemView) {
             super(itemView);
             mTv = itemView.findViewById(R.id.tv);
             mFourGridView = itemView.findViewById(R.id.four_grid_view);
-            mMultiImageLayout = itemView.findViewById(R.id.multiImageLayout);
+//            mMultiImageLayout = itemView.findViewById(R.id.multiImageLayout);
         }
     }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import com.nkw.customview.R;
 import com.nkw.customview.view.RefreshLikeIOSView;
 import com.nkw.customview.view.TabLayoutVY;
+import com.nkw.customview.view.VyLoading;
 
 public class MainActivity extends AppCompatActivity {
     private Handler mHandler = new Handler();
@@ -23,6 +24,17 @@ public class MainActivity extends AppCompatActivity {
         tablayout();
         likeIOSRefreshView();
         fourGridView();
+        VYLoading();
+    }
+
+    private void VYLoading() {
+        final VyLoading vyLoading = findViewById(R.id.vy_loading);
+        vyLoading.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                vyLoading.startLoading();
+            }
+        },1000);
     }
 
     private void fourGridView() {

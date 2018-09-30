@@ -19,7 +19,7 @@ import com.nkw.customview.R;
 import java.util.List;
 
 /**
- * Created by fen.zeng on 2018/8/13.
+ * Created by fen.zeng on 2018/8/13.根据不同的displayCnt值返回不同的布局样式
  */
 public class MultiImageLayout extends FrameLayout {
     private ImageView[] ivs;
