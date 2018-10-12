@@ -8,4 +8,5 @@
     <dimen name="sp_18">18sp</dimen>
     <dimen name="dp_20">20dp</dimen>
     <dimen name="sp_10">10sp</dimen>
+    <dimen name="dp_10">10dp</dimen>
 </resources>

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.nkw.customview.R;
+import com.nkw.customview.video.X5WebViewActivity;
 import com.nkw.customview.view.RefreshLikeIOSView;
 import com.nkw.customview.view.TabLayoutVY;
 import com.nkw.customview.view.VyLoading;
@@ -25,6 +26,16 @@ public class MainActivity extends AppCompatActivity {
         likeIOSRefreshView();
         fourGridView();
         VYLoading();
+        goX5webView();
+    }
+
+    private void goX5webView() {
+        findViewById(R.id.btn_webView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                X5WebViewActivity.startActivity(mContext);
+            }
+        });
     }
 
     private void VYLoading() {
@@ -69,4 +80,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
