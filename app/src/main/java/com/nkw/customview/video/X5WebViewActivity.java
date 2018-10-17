@@ -1,5 +1,6 @@
 package com.nkw.customview.video;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.nkw.customview.R;
-import com.nkw.customview.activity.MainActivity;
 import com.nkw.customview.video.utils.X5WebView;
 import com.tencent.smtt.sdk.TbsVideo;
 
@@ -59,7 +59,7 @@ public class X5WebViewActivity extends AppCompatActivity {
         webView.getView().setOverScrollMode(View.OVER_SCROLL_ALWAYS);
     }
 
-    public static void startActivity(MainActivity context) {
+    public static void startActivity(Context context) {
         context.startActivity(new Intent(context, X5WebViewActivity.class));
     }
 }

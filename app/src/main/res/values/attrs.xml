@@ -13,6 +13,7 @@
         <attr name="etv_GapToExpandHint" format="reference|string"/><!--gap between "toExpandHint" and "trimmed text"-->
         <attr name="etv_GapToShrinkHint" format="reference|string"/><!--gap between "toShrinkHint" and "trimmed text"-->
         <attr name="etv_EnableToggle" format="reference|boolean"/><!--if toggle the state when click ExpandTextView-->
+        <attr name="etv_EnableExpandOrShrink" format="reference|boolean"/><!--enable Expand or shrink-->
         <attr name="etv_ToExpandHintShow" format="reference|boolean"/><!--if show "toExpandHint"-->
         <attr name="etv_ToShrinkHintShow" format="reference|boolean"/><!--if show "toShrinkHint"-->
         <attr name="etv_ToExpandHintColor" format="reference|color"/><!--text color of "toExpandHint"-->

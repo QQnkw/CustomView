@@ -1,110 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TabLayoutVY"
-        android:textStyle="bold"/>
-
-    <com.nkw.customview.view.TabLayoutVY
-        android:id="@+id/tablayoutVy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="vertical"
+        tools:context=".activity.MainActivity">
 
         <TextView
-            android:id="@+id/TabOne"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TabLayoutVY"
+            android:textStyle="bold"/>
+
+        <com.nkw.customview.view.TabLayoutVY
+            android:id="@+id/tablayoutVy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TabOne"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TabOne"/>
+
+            <TextView
+                android:id="@+id/TabTwo"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TabTwo"/>
+
+            <TextView
+                android:id="@+id/TabThree"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TabThree"/>
+
+            <TextView
+                android:id="@+id/TabFour"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TabFour"/>
+        </com.nkw.customview.view.TabLayoutVY>
+
+        <!--<TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="ExpandableTextView"
+            android:textStyle="bold"/>
+
+        <com.nkw.customview.view.ExpandableTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" As a parent, you always think your child is the best ever &#45;&#45; that's just what parents do. But after seeing Kendall perform, I know she's one of the best, even though she didn't make it into the Top 24.Kendall is eighteen now, living every day to its fullest. She's recorded a CD with some of John Mellencamp's band members. She's also on CMT's Music City Madness for an original song and video, and is having some good success. I'm absolutely sure she's going to make it big some day. Kendall just puts it all in God's hands."
+            app:etv_MaxLinesOnShrink="5"/>-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="RefreshLikeIOSView"
+            android:textStyle="bold"/>
+
+        <com.nkw.customview.view.RefreshLikeIOSView
+            android:id="@+id/RefreshLikeIOSView"
+            android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TabOne"/>
+            android:layout_gravity="center"/>
 
         <TextView
-            android:id="@+id/TabTwo"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TabTwo"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="RefreshLikeIOSView"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btn_four_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FourGridView And FitPopWindow"/>
 
         <TextView
-            android:id="@+id/TabThree"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TabThree"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="VYloading"
+            android:textStyle="bold"/>
 
+        <com.nkw.customview.view.VyLoading
+            android:id="@+id/vy_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/btn_webView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="webView"/>
         <TextView
-            android:id="@+id/TabFour"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TabFour"/>
-    </com.nkw.customview.view.TabLayoutVY>
-
-    <!--<TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="ExpandableTextView"
-        android:textStyle="bold"/>
-
-    <com.nkw.customview.view.ExpandableTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" As a parent, you always think your child is the best ever &#45;&#45; that's just what parents do. But after seeing Kendall perform, I know she's one of the best, even though she didn't make it into the Top 24.Kendall is eighteen now, living every day to its fullest. She's recorded a CD with some of John Mellencamp's band members. She's also on CMT's Music City Madness for an original song and video, and is having some good success. I'm absolutely sure she's going to make it big some day. Kendall just puts it all in God's hands."
-        app:etv_MaxLinesOnShrink="5"/>-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="RefreshLikeIOSView"
-        android:textStyle="bold"/>
-
-    <com.nkw.customview.view.RefreshLikeIOSView
-        android:id="@+id/RefreshLikeIOSView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="RefreshLikeIOSView"
-        android:textStyle="bold"/>
-
-    <Button
-        android:id="@+id/btn_four_grid_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="FourGridView And FitPopWindow"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="VYloading"
-        android:textStyle="bold"/>
-
-    <com.nkw.customview.view.VyLoading
-        android:id="@+id/vy_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-    <Button
-        android:id="@+id/btn_webView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="webView"/>
-</LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="DragLayout"
+            android:textStyle="bold"/>
+        <Button
+            android:text="DragLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_dragLayout"/>
+    </LinearLayout>
+</ScrollView>

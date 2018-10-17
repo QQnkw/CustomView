@@ -1,8 +1,6 @@
 package com.nkw.customview.activity;
 
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
@@ -12,28 +10,40 @@ import com.nkw.customview.view.RefreshLikeIOSView;
 import com.nkw.customview.view.TabLayoutVY;
 import com.nkw.customview.view.VyLoading;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private Handler mHandler = new Handler();
     private int     mNum     = 0;
-    private MainActivity mContext;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mContext = this;
+    protected void initViewSet() {
+        super.initViewSet();
         tablayout();
         likeIOSRefreshView();
         fourGridView();
         VYLoading();
         goX5webView();
+        goDragLayout();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    private void goDragLayout() {
+        findViewById(R.id.btn_dragLayout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DragActivity.startActivity(mActivity);
+            }
+        });
     }
 
     private void goX5webView() {
         findViewById(R.id.btn_webView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                X5WebViewActivity.startActivity(mContext);
+                X5WebViewActivity.startActivity(mActivity);
             }
         });
     }
@@ -52,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_four_grid_view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FourGridViewActivity.startActivity(mContext);
+                FourGridViewActivity.startActivity(mActivity);
             }
         });
     }
