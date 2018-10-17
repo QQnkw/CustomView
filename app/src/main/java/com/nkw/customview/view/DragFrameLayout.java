@@ -60,13 +60,12 @@ public class DragFrameLayout extends FrameLayout {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        Log.d("NKW--->", "changed:" + changed + "   left:" + left + "   top:" + top + "   right:" + right + "   bottom:" + bottom);
-        /*if (mIsDrag && changed) {
+        Log.d("NKW--->", "mIsDrag:"+mIsDrag+"   changed:" + changed + "   left:" + left + "   top:" + top + "   right:" + right + "   bottom:" + bottom);
+        if (mIsDrag && changed) {
             setLayoutLocation(mLeft, mTop);
         } else {
             super.onLayout(changed, left, top, right, bottom);
-        }*/
-            super.onLayout(changed, left, top, right, bottom);
+        }
     }
 
     private int startRawX = 0;
@@ -79,14 +78,8 @@ public class DragFrameLayout extends FrameLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                startRawX = (int) event.getRawX();
-                startRawY = (int) event.getRawY();
-                preRawX = startRawX;
-                preRawY = startRawY;
-                mIsDrag = false;
-                break;
             case MotionEvent.ACTION_MOVE:
+                mIsDrag = false;
                 int moveRawX = (int) event.getRawX();
                 int moveRawY = (int) event.getRawY();
                 int difX = moveRawX - preRawX;
@@ -179,6 +172,8 @@ public class DragFrameLayout extends FrameLayout {
             case MotionEvent.ACTION_DOWN:
                 startRawX = (int) ev.getRawX();
                 startRawY = (int) ev.getRawY();
+                preRawX = startRawX;
+                preRawY = startRawY;
                 break;
             case MotionEvent.ACTION_UP:
                 break;
@@ -188,6 +183,7 @@ public class DragFrameLayout extends FrameLayout {
                 }
                 break;
         }
-        return false;
+
+        return super.onInterceptTouchEvent(ev);
     }
 }
