@@ -53,6 +53,8 @@ public class X5WebViewActivity extends AppCompatActivity {
         //		webView.loadUrl("https://tv.sohu.com/upload/static/share/share_play.html#106903751_9114930_0_9001_0");
         //		webView.loadUrl("https://v.qq.com/txp/iframe/player.html?vid=i0737bacynk");
         webView.loadUrl("http://player.youku.com/embed/XMzg1MzkyMzk0MA==");
+        //爱奇艺视频播放按钮会重叠
+//        webView.loadUrl("http://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=3675f352a8c555371731c1b09ce8d298&tvId=24357822709&accessToken=2.f22860a2479ad60d8da7697274de9346&appKey=3955c3425820435e86d0f4cdfe56f5e7&appId=1368&height=100%&width=100%");
 
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
 

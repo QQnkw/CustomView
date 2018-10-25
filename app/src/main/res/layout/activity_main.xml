@@ -112,16 +112,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="webView"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="DragLayout"
             android:textStyle="bold"/>
+
         <Button
-            android:text="DragLayout"
+            android:id="@+id/btn_dragLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_dragLayout"/>
+            android:text="DragLayout"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="弹幕"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btn_barrage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="barrage"/>
     </LinearLayout>
 </ScrollView>

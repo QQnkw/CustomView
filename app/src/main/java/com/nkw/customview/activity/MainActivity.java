@@ -23,6 +23,16 @@ public class MainActivity extends BaseActivity {
         VYLoading();
         goX5webView();
         goDragLayout();
+        goBarrageGroup();
+    }
+
+    private void goBarrageGroup() {
+        findViewById(R.id.btn_barrage).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BarrageGroupViewActivity.startActivity(mActivity);
+            }
+        });
     }
 
     @Override
