@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,28 +7,36 @@
     android:layout_height="match_parent"
     tools:context=".activity.DragActivity">
 
-    <com.nkw.customview.view.DragFrameLayout
-        android:id="@+id/dragLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+     <!--<com.nkw.customview.view.DragFrameLayout
+         android:id="@+id/dragLayout"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"/>
+             <ImageView
+                 android:id="@+id/iv"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@mipmap/ic_launcher"/>
 
-            <Button
-                android:id="@+id/btn_show_hide"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="显示/隐藏"/>
-        </LinearLayout>
+             <Button
+                 android:id="@+id/btn_show_hide"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="显示/隐藏"/>
+         </LinearLayout>
 
-    </com.nkw.customview.view.DragFrameLayout>
-</FrameLayout>
+     </com.nkw.customview.view.DragFrameLayout>-->
+    <include
+        android:id="@+id/view"
+        layout="@layout/view_drag_group"/>
+    <View
+        android:layout_below="@id/view"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/colorAccent"/>
+</RelativeLayout>

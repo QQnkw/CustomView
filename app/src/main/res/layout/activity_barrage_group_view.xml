@@ -8,19 +8,23 @@
     android:orientation="vertical"
     tools:context=".activity.BarrageGroupViewActivity">
 
-    <com.nkw.customview.view.BarrageGroupView
-        android:id="@+id/bgv"
-        app:rowNum="10"
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
-    </com.nkw.customview.view.BarrageGroupView>
-
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@drawable/bg"
-        android:orientation="vertical">
+        android:layout_height="500dp"
+        android:layout_margin="@dimen/dp_20">
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/clip_img"/>
+        <com.nkw.customview.view.BarrageGroupView
+            android:id="@+id/bgv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            app:rowNum="10">
+        </com.nkw.customview.view.BarrageGroupView>
+    </FrameLayout>
 </LinearLayout>

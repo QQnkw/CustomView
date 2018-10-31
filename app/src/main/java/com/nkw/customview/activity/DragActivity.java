@@ -4,17 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.nkw.customview.R;
-import com.nkw.customview.view.DragFrameLayout;
-
-import butterknife.BindView;
 
 public class DragActivity extends BaseActivity {
 
-    @BindView(R.id.dragLayout)
-    DragFrameLayout mDragLayout;
+    /*@BindView(R.id.dragLayout)
+    DragFrameLayout mDragLayout;*/
+    /*@BindView(R.id.dragLayout)
+    DragGroupLyout mDragLayout;*/
     private ImageView mImageView;
 
     @Override
@@ -29,13 +27,13 @@ public class DragActivity extends BaseActivity {
     @Override
     protected void initViewSet() {
         super.initViewSet();
-        mDragLayout.setDragFrameClickListener(new DragFrameLayout.DragFrameClickListener() {
+        /*mDragLayout.setDragFrameClickListener(new DragFrameLayout.DragFrameClickListener() {
             @Override
             public void onDragFrameClick() {
                 Toast.makeText(mActivity, "點擊了", Toast.LENGTH_SHORT).show();
             }
         });
-        mDragLayout.setDragMarginParent(30, 50, 100, 200);
+        mDragLayout.setDragMarginParent(30, 50, 100, 200);*/
         mImageView = findViewById(R.id.iv);
         findViewById(R.id.btn_show_hide).setOnClickListener(new View.OnClickListener() {
             @Override
