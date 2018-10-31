@@ -24,6 +24,16 @@ public class MainActivity extends BaseActivity {
         goX5webView();
         goDragLayout();
         goBarrageGroup();
+        goBtnRadar();
+    }
+
+    private void goBtnRadar() {
+        findViewById(R.id.btn_radar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BadarActivity.startActivity(mActivity);
+            }
+        });
     }
 
     private void goBarrageGroup() {
