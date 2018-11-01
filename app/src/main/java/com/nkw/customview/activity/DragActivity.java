@@ -9,8 +9,6 @@ import com.nkw.customview.R;
 
 public class DragActivity extends BaseActivity {
 
-    /*@BindView(R.id.dragLayout)
-    DragFrameLayout mDragLayout;*/
     private ImageView mImageView;
 
     @Override
@@ -25,13 +23,6 @@ public class DragActivity extends BaseActivity {
     @Override
     protected void initViewSet() {
         super.initViewSet();
-        /*mDragLayout.setDragFrameClickListener(new DragFrameLayout.DragFrameClickListener() {
-            @Override
-            public void onDragFrameClick() {
-                Toast.makeText(mActivity, "點擊了", Toast.LENGTH_SHORT).show();
-            }
-        });
-        mDragLayout.setDragMarginParent(30, 50, 100, 200);*/
         mImageView = findViewById(R.id.iv);
         findViewById(R.id.btn_show_hide).setOnClickListener(new View.OnClickListener() {
             @Override
