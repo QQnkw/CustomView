@@ -11,8 +11,6 @@ public class DragActivity extends BaseActivity {
 
     /*@BindView(R.id.dragLayout)
     DragFrameLayout mDragLayout;*/
-    /*@BindView(R.id.dragLayout)
-    DragGroupLyout mDragLayout;*/
     private ImageView mImageView;
 
     @Override

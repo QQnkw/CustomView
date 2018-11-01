@@ -6,10 +6,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
 
 import com.nkw.customview.R;
 
@@ -38,7 +38,7 @@ public class VyRadar extends View {
     };
     private long mLastCreateTime;//上一个创建时间
     private List<Circle> mCircleList = new ArrayList<Circle>();
-    private Interpolator mInterpolator;
+    private Interpolator mInterpolator = new LinearOutSlowInInterpolator();
     private long mDuration = 18000; // 一个波纹从创建到消失的持续时间
     private int mSize;
 
@@ -169,9 +169,6 @@ public class VyRadar extends View {
 
     public void setInterpolator(Interpolator interpolator) {
         mInterpolator = interpolator;
-        if (mInterpolator == null) {
-            mInterpolator = new LinearInterpolator();
-        }
     }
 
     public void setSpeed(int speed) {
