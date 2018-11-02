@@ -26,7 +26,13 @@ public class VyRadar extends View {
     private Paint   mPaint;
     private Bitmap  mTrackBitmap;//轨道上的图片
     private boolean mIsRunning;
-    private int      mSpeed        = 3000;   // 波纹的创建速度，每500ms创建一个
+    private int      mSpeed        = 2000;   // 波纹的创建速度，每500ms创建一个
+    private long mLastCreateTime;//上一个创建时间
+    private List<Circle> mCircleList = new ArrayList<Circle>();
+    private Interpolator mInterpolator = new LinearOutSlowInInterpolator();
+    private long mDuration = 8000; // 一个波纹从创建到消失的持续时间
+    private int mSize;
+    private int mInitCircleWaveRedius;//波纹初始半径
     private Runnable mCreateCircle = new Runnable() {
         @Override
         public void run() {
@@ -36,11 +42,10 @@ public class VyRadar extends View {
             }
         }
     };
-    private long mLastCreateTime;//上一个创建时间
-    private List<Circle> mCircleList = new ArrayList<Circle>();
-    private Interpolator mInterpolator = new LinearOutSlowInInterpolator();
-    private long mDuration = 18000; // 一个波纹从创建到消失的持续时间
-    private int mSize;
+
+    public void setInitCircleWaveRedius(int initCircleWaveRedius) {
+        mInitCircleWaveRedius = initCircleWaveRedius;
+    }
 
     public VyRadar(Context context) {
         this(context, null);
@@ -82,7 +87,7 @@ public class VyRadar extends View {
         mSize = w;
     }
 
-    private float mDegrees = 0;
+    private float mDegrees = 135;
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -99,7 +104,7 @@ public class VyRadar extends View {
     private void drawTrackBitmap(Canvas canvas) {
         canvas.rotate(mDegrees);
         canvas.drawBitmap(mTrackBitmap, -mTrackBitmap.getWidth() / 2, -mTrackRedius - mTrackBitmap.getHeight() / 2, null);
-        mDegrees += 0.5;
+        mDegrees += 0.25;
         if (mDegrees == 360) {
             mDegrees = 0;
         }
@@ -107,7 +112,7 @@ public class VyRadar extends View {
 
     private void drawTrack(Canvas canvas) {
         mPaint.setAlpha(0);
-        mPaint.setColor(getResources().getColor(R.color.app_grayDCDBDB));
+        mPaint.setColor(getResources().getColor(R.color.app_grayC4C2C2));
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(1);
         canvas.drawCircle(0, 0, mTrackRedius, mPaint);
@@ -119,23 +124,23 @@ public class VyRadar extends View {
 
 
     private void drawWave(Canvas canvas) {
-        mPaint.setColor(getResources().getColor(R.color.app_gray979797));
+        mPaint.setColor(getResources().getColor(R.color.app_grayF0F0F0));
         mPaint.setStyle(Paint.Style.FILL);
         Iterator<Circle> iterator = mCircleList.iterator();
         while (iterator.hasNext()) {
             Circle circle = iterator.next();
             float radius = circle.getCurrentRadius();
             if (System.currentTimeMillis() - circle.mCreateTime < mDuration) {
-//            Log.d("NKW--->","控件半径"+mSize/2+"||radius"+radius);
-//                Log.d("NKW--->","绘制");
+                //            Log.d("NKW--->","控件半径"+mSize/2+"||radius"+radius);
+                //                Log.d("NKW--->","绘制");
                 mPaint.setAlpha(circle.getAlpha());
                 canvas.drawCircle(0, 0, radius, mPaint);
             } else {
-//                Log.d("NKW--->","删除");
+                //                Log.d("NKW--->","删除");
                 iterator.remove();
             }
         }
-//        Log.d("NKW--->","集合大小"+mCircleList.size());
+        //        Log.d("NKW--->","集合大小"+mCircleList.size());
     }
 
 
@@ -167,6 +172,7 @@ public class VyRadar extends View {
     }
 
 
+    /*LinearOutSlowInInterpolator水波纹推挤这个*/
     public void setInterpolator(Interpolator interpolator) {
         mInterpolator = interpolator;
     }
@@ -193,19 +199,17 @@ public class VyRadar extends View {
         }
 
         int getAlpha() {
-           /* float percent = (getCurrentRadius() - mInitCircleWaveRedius) / (mSize/2 - mInitCircleWaveRedius);
-            return (int) (255 - mInterpolator.getInterpolation(percent) * 255); */
-            float percent = getCurrentRadius() / (mSize / 2);
+            float percent = (getCurrentRadius() - mInitCircleWaveRedius) / (mSize/2 - mInitCircleWaveRedius);
             return (int) (255 - mInterpolator.getInterpolation(percent) * 255);
             /*float percent = (System.currentTimeMillis() - mCreateTime) * 1.0f / (mDuration);
             return (int) (255 - mInterpolator.getInterpolation(percent) * 255);*/
         }
 
         float getCurrentRadius() {
-            /*float percent = (System.currentTimeMillis() - mCreateTime) * 1.0f / (mDuration);
-            return mInitCircleWaveRedius + mInterpolator.getInterpolation(percent) * (mSize / 2 - mInitCircleWaveRedius);*/
             float percent = (System.currentTimeMillis() - mCreateTime) * 1.0f / (mDuration);
-            return mInterpolator.getInterpolation(percent) * (mSize / 2);
+            return mInitCircleWaveRedius + mInterpolator.getInterpolation(percent) * (mSize / 2 - mInitCircleWaveRedius);
+            /*float percent = (System.currentTimeMillis() - mCreateTime) * 1.0f / (mDuration);
+            return mInterpolator.getInterpolation(percent) * (mSize / 2);*/
         }
     }
 }
