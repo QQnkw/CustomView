@@ -18,6 +18,7 @@ import com.nkw.customview.utils.GlideUtils;
 import com.nkw.customview.view.ExpandableTextView;
 import com.nkw.customview.view.fourGridView.VyFourGridView;
 import com.nkw.customview.view.popupwindow.PopWindowAboutPost;
+import com.nkw.customview.view.text.AlignTextView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -104,8 +105,9 @@ public class FourGridViewActivity extends BaseActivity {
                     }
                 });
             }
-            holder.mEtv.updateForRecyclerView(ToDBC(mPoems[position]), mEtvWidth, ExpandableTextView.STATE_SHRINK);
             holder.mTvContent.setText(ToDBC(mPoems[position]));
+            holder.mAlignTv.setText(mPoems[position]);
+            holder.mEtv.updateForRecyclerView(ToDBC(mPoems[position]), mEtvWidth, ExpandableTextView.STATE_SHRINK);
         }
 
         @Override
@@ -134,6 +136,7 @@ public class FourGridViewActivity extends BaseActivity {
 
         private final ExpandableTextView mEtv;
         private final TextView           mTvContent;
+        private final AlignTextView      mAlignTv;
         private       TextView           mTv;
         private       VyFourGridView     mFourGridView;
         private final Button             mBtn;
@@ -145,6 +148,7 @@ public class FourGridViewActivity extends BaseActivity {
             mEtv = itemView.findViewById(R.id.etv);
             mTvContent = itemView.findViewById(R.id.tv_content);
             mFourGridView = itemView.findViewById(R.id.four_grid_view);
+            mAlignTv = itemView.findViewById(R.id.align_tv);
             //            mMultiImageLayout = itemView.findViewById(R.id.multiImageLayout);
             mBtn = itemView.findViewById(R.id.btn);
         }

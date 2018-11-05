@@ -36,18 +36,22 @@
         android:text="NKW"
         android:textSize="@dimen/sp_18"/>
 
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <com.nkw.customview.view.text.AlignTextView
+        android:id="@+id/align_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <com.nkw.customview.view.ExpandableTextView
         android:id="@+id/etv"
         app:etv_MaxLinesOnShrink="4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#22aaaaaa"/>
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
     <com.nkw.customview.view.fourGridView.VyFourGridView
         android:id="@+id/four_grid_view"
         android:layout_width="match_parent"
