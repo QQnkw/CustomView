@@ -100,7 +100,7 @@ public class DragGroupLyout extends FrameLayout {
                 mMovePreY = mDownY;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (Math.abs(ev.getX() - mDownX) > 5 || Math.abs(ev.getY() - mDownY) > 5) {
+                if (Math.abs(ev.getRawX() - mDownX) > 5 || Math.abs(ev.getRawY() - mDownY) > 5) {
                     return true;
                 }
                 break;
