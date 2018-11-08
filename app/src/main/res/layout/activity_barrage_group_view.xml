@@ -19,12 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/clip_img"/>
-        <com.nkw.customview.view.BarrageGroupView
+        <com.nkw.customview.view.barrage.BarrageGroupView
             android:id="@+id/bgv"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center"
             app:rowNum="10">
-        </com.nkw.customview.view.BarrageGroupView>
+        </com.nkw.customview.view.barrage.BarrageGroupView>
     </FrameLayout>
 </LinearLayout>

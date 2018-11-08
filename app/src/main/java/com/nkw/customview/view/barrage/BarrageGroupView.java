@@ -1,4 +1,4 @@
-package com.nkw.customview.view;
+package com.nkw.customview.view.barrage;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -69,12 +70,13 @@ public class BarrageGroupView extends RelativeLayout {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
+                Log.d("NKW--->","handleMessage");
                 if (msg.what == MESSAGE_ANIMATION) {
                     if (isRunning && mList != null && !mList.isEmpty()) {
                         int showRowNum = mRandom.nextInt(100) % mRowNum;
                         while (mRowList.contains(showRowNum + "")) {
                             if (mRowList.size() == mRowNum) {
-                                mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 500);
+                                mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 50);
                                 //                            mHandler.post(this);
                                 return;
                             } else {
@@ -83,6 +85,11 @@ public class BarrageGroupView extends RelativeLayout {
                         }
                         mRowList.add(showRowNum + "");
                         TextView textView = mRowTextViewMap.get(showRowNum);
+//                        Log.d("NKW--init->",textView==null?"空":"不为空"+showRowNum);
+                        if (textView == null) {
+                            mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 500);
+                            return;
+                        }
                         if (index >= mList.size()) {
                             index %= mList.size();
                         }
@@ -91,7 +98,7 @@ public class BarrageGroupView extends RelativeLayout {
                         addView(textView);
                         index++;
                         animatorAlphaAndTranslation(textView);
-                        mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 1000);
+                        mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 100);
                     }
                 }
             }
@@ -101,6 +108,7 @@ public class BarrageGroupView extends RelativeLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        Log.d("NKW--->","onSizeChanged");
         mWidth = w;
         mHeight = h;
         createRowTextView();
@@ -170,9 +178,10 @@ public class BarrageGroupView extends RelativeLayout {
     private int index = 0;
 
     public void startBarrage() {
+        Log.d("NKW--->","startBarrage");
         isRunning = true;
         if (!mHandler.hasMessages(MESSAGE_ANIMATION)) {
-            mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 500);
+            mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 50);
         }
     }
 

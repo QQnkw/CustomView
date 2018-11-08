@@ -124,7 +124,8 @@ public class VyRadar extends View {
 
 
     private void drawWave(Canvas canvas) {
-        mPaint.setColor(getResources().getColor(R.color.app_grayF0F0F0));
+//        mPaint.setColor(getResources().getColor(R.color.app_grayF0F0F0));
+        mPaint.setColor(getResources().getColor(R.color.app_purple_6445F3));
         mPaint.setStyle(Paint.Style.FILL);
         Iterator<Circle> iterator = mCircleList.iterator();
         while (iterator.hasNext()) {

@@ -9,7 +9,7 @@ import android.os.Message;
 import android.widget.ImageView;
 
 import com.nkw.customview.R;
-import com.nkw.customview.view.BarrageGroupView;
+import com.nkw.customview.view.barrage.BarrageGroupView;
 
 import java.util.ArrayList;
 import java.util.Timer;
