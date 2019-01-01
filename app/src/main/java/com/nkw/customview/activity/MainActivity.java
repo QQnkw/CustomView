@@ -1,5 +1,6 @@
 package com.nkw.customview.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
         likeIOSRefreshView();
         fourGridView();
         VYLoading();
+        findViewById(R.id.btn_dian_lu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext,VyWoQuActivity.class));
+            }
+        });
     }
 
     private void VYLoading() {
