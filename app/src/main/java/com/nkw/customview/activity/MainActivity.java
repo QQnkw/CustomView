@@ -1,5 +1,6 @@
 package com.nkw.customview.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -25,10 +26,14 @@ public class MainActivity extends BaseActivity {
         goDragLayout();
         goBarrageGroup();
         goBtnRadar();
+        goVyWoQu();
+    }
+
+    private void goVyWoQu() {
         findViewById(R.id.btn_dian_lu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(mContext,VyWoQuActivity.class));
+                startActivity(new Intent(mActivity,VyWoQuActivity.class));
             }
         });
     }
