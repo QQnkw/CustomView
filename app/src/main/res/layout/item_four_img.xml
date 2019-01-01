@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_shadow2"
-    android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
+    android:layout_marginStart="5dp"
+    android:background="@drawable/bg_shadow2"
     android:orientation="vertical">
     <!--android:background="@color/app_white_fff"-->
 
@@ -20,11 +21,11 @@
             android:textSize="@dimen/sp_18"/>
 
         <Button
-            android:layout_marginEnd="@dimen/dp_20"
             android:id="@+id/btn"
             style="@style/Layout_Wrap_Wrap"
             android:layout_width="50dp"
             android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/dp_20"
             android:text="pop"
             android:textSize="@dimen/sp_10"/>
     </RelativeLayout>
@@ -35,6 +36,22 @@
         android:text="NKW"
         android:textSize="@dimen/sp_18"/>
 
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <com.nkw.customview.view.text.AlignTextView
+        android:id="@+id/align_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <com.nkw.customview.view.ExpandableTextView
+        android:id="@+id/etv"
+        app:etv_MaxLinesOnShrink="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#22aaaaaa"/>
     <com.nkw.customview.view.fourGridView.VyFourGridView
         android:id="@+id/four_grid_view"
         android:layout_width="match_parent"

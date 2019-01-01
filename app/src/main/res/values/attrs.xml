@@ -13,6 +13,7 @@
         <attr name="etv_GapToExpandHint" format="reference|string"/><!--gap between "toExpandHint" and "trimmed text"-->
         <attr name="etv_GapToShrinkHint" format="reference|string"/><!--gap between "toShrinkHint" and "trimmed text"-->
         <attr name="etv_EnableToggle" format="reference|boolean"/><!--if toggle the state when click ExpandTextView-->
+        <attr name="etv_EnableExpandOrShrink" format="reference|boolean"/><!--enable Expand or shrink-->
         <attr name="etv_ToExpandHintShow" format="reference|boolean"/><!--if show "toExpandHint"-->
         <attr name="etv_ToShrinkHintShow" format="reference|boolean"/><!--if show "toShrinkHint"-->
         <attr name="etv_ToExpandHintColor" format="reference|color"/><!--text color of "toExpandHint"-->
@@ -32,28 +33,39 @@
     </declare-styleable>
     <!--来自网络-->
     <declare-styleable name="PagerSlidingTabStrip">
-        <attr name="pstsIndicatorColor" format="color" />
-        <attr name="pstsUnderlineColor" format="color" />
-        <attr name="pstsDividerColor" format="color" />
-        <attr name="pstsIndicatorHeight" format="dimension" />
-        <attr name="pstsUnderlineHeight" format="dimension" />
-        <attr name="pstsDividerPadding" format="dimension" />
-        <attr name="pstsTabPaddingLeftRight" format="dimension" />
-        <attr name="pstsScrollOffset" format="dimension" />
-        <attr name="pstsTabBackground" format="reference" />
-        <attr name="pstsShouldExpand" format="boolean" />
-        <attr name="pstsTextAllCaps" format="boolean" />
+        <attr name="pstsIndicatorColor" format="color"/>
+        <attr name="pstsUnderlineColor" format="color"/>
+        <attr name="pstsDividerColor" format="color"/>
+        <attr name="pstsIndicatorHeight" format="dimension"/>
+        <attr name="pstsUnderlineHeight" format="dimension"/>
+        <attr name="pstsDividerPadding" format="dimension"/>
+        <attr name="pstsTabPaddingLeftRight" format="dimension"/>
+        <attr name="pstsScrollOffset" format="dimension"/>
+        <attr name="pstsTabBackground" format="reference"/>
+        <attr name="pstsShouldExpand" format="boolean"/>
+        <attr name="pstsTextAllCaps" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="MultiImageLayout">
         <attr name="layout_mode">
-            <enum name="custom" value="0" />
-            <enum name="grid" value="1" />
+            <enum name="custom" value="0"/>
+            <enum name="grid" value="1"/>
         </attr>
-        <attr name="wh_ratio" format="float" />
+        <attr name="wh_ratio" format="float"/>
     </declare-styleable>
     <declare-styleable name="VyLoading">
-        <attr name="arcWidth" format="dimension" />
-        <attr name="arcColor" format="color" />
+        <attr name="arcWidth" format="dimension"/>
+        <attr name="arcColor" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="BarrageGroupView">
+        <attr name="rowNum" format="integer"/>
+    </declare-styleable>
+    <!-- 末行对齐方式 -->
+    <declare-styleable name="AlignTextView">
+        <attr name="align" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
     </declare-styleable>
 </resources>

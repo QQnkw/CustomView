@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.BarrageGroupViewActivity">
+
+    <FrameLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_margin="@dimen/dp_20">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/clip_img"/>
+        <com.nkw.customview.view.barrage.BarrageGroupView
+            android:id="@+id/bgv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            app:rowNum="10">
+        </com.nkw.customview.view.barrage.BarrageGroupView>
+    </FrameLayout>
+</LinearLayout>
