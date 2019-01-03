@@ -15,21 +15,14 @@
 
     <com.nkw.customview.view.VyWoQuViewGroup
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
+        <!--android:background="@color/colorPrimary"-->
 
-    <ImageView
-        android:visibility="gone"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center"
-        android:background="@color/app_black_2A2A2A"/>
-
-    <com.nkw.customview.view.VyHexagonImageView
-        android:visibility="gone"
+    <!--<com.nkw.customview.view.VyHexagonImageView
         android:id="@+id/iv"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginLeft="75dp"
         android:layout_marginTop="65dp"
-        android:src="@mipmap/pic"/>
+        android:src="@mipmap/pic"/>-->
 </FrameLayout>
