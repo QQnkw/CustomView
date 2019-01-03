@@ -18,7 +18,7 @@ public class VyWoQuActivity extends AppCompatActivity {
         viewById.setOnClickHexagonListener(new VyHexagonImageView.OnClickHexagonListener() {
             @Override
             public void clickHexagon(View view) {
-                Toast.makeText(VyWoQuActivity.this,"被点击了",Toast.LENGTH_LONG).show();
+                Toast.makeText(VyWoQuActivity.this,"被点击了",Toast.LENGTH_SHORT).show();
             }
         });
     }

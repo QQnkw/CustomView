@@ -19,7 +19,7 @@ public class VyWoQuViewGroup extends FrameLayout {
 
     private Point[] mFirstLinePointArr   = {new Point(107, 203), new Point(127, 203),
             new Point(117, 209), new Point(117, 278),
-            new Point(161, 308)};
+            new Point(162, 310)};
     private Point[] mSecondLinePointArr  = {new Point(193, 95), new Point(193, 147),
             new Point(181, 155), new Point(181, 187),
             new Point(135, 213), new Point(135, 274),
@@ -31,8 +31,8 @@ public class VyWoQuViewGroup extends FrameLayout {
     private Point[] mFourthLinePointArr  = {new Point(278, 174), new Point(298, 174),
             new Point(288, 180), new Point(288, 219),
             new Point(248, 242), new Point(248, 292),
-            new Point(218, 313)};
-    private Point[] mFifthLinePointArr   = {new Point(154, 343), new Point(85, 384),
+            new Point(215, 312)};
+    private Point[] mFifthLinePointArr   = {new Point(155, 344), new Point(85, 384),
             new Point(85, 476), new Point(75, 482),
             new Point(95, 482)};
     private Point[] mSixthLinePointArr   = {new Point(150, 367), new Point(108, 392),
@@ -42,7 +42,7 @@ public class VyWoQuViewGroup extends FrameLayout {
             new Point(233, 442), new Point(243, 448),
             new Point(243, 480), new Point(206, 503),
             new Point(206, 547)};
-    private Point[] mEighthLinePointArr  = {new Point(214, 358), new Point(277, 396),
+    private Point[] mEighthLinePointArr  = {new Point(212, 359), new Point(277, 396),
             new Point(277, 469), new Point(267, 475),
             new Point(287, 475)};
     private Path  mLinePath;

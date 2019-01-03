@@ -22,23 +22,23 @@ import android.view.MotionEvent;
 import android.view.View;
 
 public class VyHexagonImageView extends AppCompatImageView {
-    private              String        tag                     = "HexagonImageView";
-    private static final Bitmap.Config BITMAP_CONFIG           = Bitmap.Config.ARGB_8888;
-    private static final int           COLORDRAWABLE_DIMENSION = 1;
-    private static final Matrix        mShaderMatrix           = new Matrix();
-    private static final Paint         mBitmapPaint            = new Paint();
-    private              BitmapShader  mBitmapShader;
-    private              int           mBitmapWidth;
-    private              int           mBitmapHeight;
-    private              int           mWidth                  = 0;
-    private              Bitmap        mBitmap;
-    private              Paint         mBorderPaint;
-    private              int           mDefaultStrokeWidth     = 10;
-    private              String        mInnerBorderColor       = "#FFFFFF";
-    private              String        mOuterVBorderColor      = "#E13133";
-    private              Path          mInnerBorderPath;
-    private              Path          mOuterBorderPath;
-    private OnClickHexagonListener mListener;
+    private              String                 tag                     = "HexagonImageView";
+    private static final Bitmap.Config          BITMAP_CONFIG           = Bitmap.Config.ARGB_8888;
+    private static final int                    COLORDRAWABLE_DIMENSION = 1;
+    private static final Matrix                 mShaderMatrix           = new Matrix();
+    private static final Paint                  mBitmapPaint            = new Paint();
+    private              BitmapShader           mBitmapShader;
+    private              int                    mBitmapWidth;
+    private              int                    mBitmapHeight;
+    private              int                    mWidth                  = 0;
+    private              Bitmap                 mBitmap;
+    private              Paint                  mBorderPaint;
+    private              int                    mDefaultStrokeWidth     = 10;
+    private              String                 mInnerBorderColor       = "#FFFFFF";
+    private              String                 mOuterVBorderColor      = "#E13133";
+    private              Path                   mInnerBorderPath;
+    private              Path                   mOuterBorderPath;
+    private              OnClickHexagonListener mListener;
 
     public VyHexagonImageView(Context context) {
         this(context, null);
@@ -84,18 +84,8 @@ public class VyHexagonImageView extends AppCompatImageView {
         if (mOuterBorderPath == null) {
             mOuterBorderPath = new Path();
         }
-        mOuterBorderPath.reset();
         float outWidth = mWidth - mDefaultStrokeWidth;
-        float d = (float) (outWidth / 4 * (2 - Math.sqrt(3)));//六边形到边到内切圆的距离
-        float r = outWidth / 4;
-        //竖六边形
-        mOuterBorderPath.moveTo(outWidth / 2, 0);
-        mOuterBorderPath.lineTo(outWidth - d, r);
-        mOuterBorderPath.lineTo(outWidth - d, r * 3);
-        mOuterBorderPath.lineTo(outWidth / 2, outWidth);
-        mOuterBorderPath.lineTo(d, r * 3);
-        mOuterBorderPath.lineTo(d, r);
-        mOuterBorderPath.close();
+        mOuterBorderPath = createPath(outWidth, mOuterBorderPath);
         mOuterBorderPath.offset(mDefaultStrokeWidth * 0.5f, mDefaultStrokeWidth * 0.5f);
         return mOuterBorderPath;
     }
@@ -104,18 +94,8 @@ public class VyHexagonImageView extends AppCompatImageView {
         if (mInnerBorderPath == null) {
             mInnerBorderPath = new Path();
         }
-        mInnerBorderPath.reset();
         float innerWidth = mWidth - mDefaultStrokeWidth * 3f;
-        float d = (float) (innerWidth / 4 * (2 - Math.sqrt(3)));//六边形到边到内切圆的距离
-        float r = innerWidth / 4;
-        //竖六边形
-        mInnerBorderPath.moveTo(innerWidth / 2, 0);
-        mInnerBorderPath.lineTo(innerWidth - d, r);
-        mInnerBorderPath.lineTo(innerWidth - d, r * 3);
-        mInnerBorderPath.lineTo(innerWidth / 2, innerWidth);
-        mInnerBorderPath.lineTo(d, r * 3);
-        mInnerBorderPath.lineTo(d, r);
-        mInnerBorderPath.close();
+        mInnerBorderPath = createPath(innerWidth, mInnerBorderPath);
         mInnerBorderPath.offset(mDefaultStrokeWidth * 1.5f, mDefaultStrokeWidth * 1.5f);
         return mInnerBorderPath;
     }
@@ -126,18 +106,23 @@ public class VyHexagonImageView extends AppCompatImageView {
         if (mPath == null) {
             mPath = new Path();
         }
+        mPath = createPath(mWidth, mPath);
 
-        mPath.reset();
-        float d = (float) ((float) mWidth / 4 * (2 - Math.sqrt(3)));//六边形到边到内切圆的距离
-        float r = mWidth / 4;
+        return mPath;
+    }
+
+    private Path createPath(float width, Path path) {
+        path.reset();
+        float d = (float) ((float) width / 4 * (2 - Math.sqrt(3)));//六边形到边到内切圆的距离
+        float r = width / 4;
         //竖六边形
-        mPath.moveTo(mWidth / 2, 0);
-        mPath.lineTo(mWidth - d, r);
-        mPath.lineTo(mWidth - d, r * 3);
-        mPath.lineTo(mWidth / 2, mWidth);
-        mPath.lineTo(d, r * 3);
-        mPath.lineTo(d, r);
-        mPath.close();
+        path.moveTo(width / 2, 0);
+        path.lineTo(width - d, r);
+        path.lineTo(width - d, r * 3);
+        path.lineTo(width / 2, width);
+        path.lineTo(d, r * 3);
+        path.lineTo(d, r);
+        path.close();
         //横六边形
         /*float p0x = r;
         float p0y = d;
@@ -165,8 +150,7 @@ public class VyHexagonImageView extends AppCompatImageView {
         mPath.lineTo(p4x,p4y);
         mPath.lineTo(p5x,p5y);
         mPath.lineTo(p0x,p0y);*/
-
-        return mPath;
+        return path;
     }
 
 
@@ -272,19 +256,20 @@ public class VyHexagonImageView extends AppCompatImageView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        Point point = new Point((int) event.getX(), (int) event.getY());
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                if (isInHexagon(mPath, point)) {
+                Point downPoint = new Point((int) event.getX(), (int) event.getY());
+                if (isInHexagon(mPath, downPoint)) {
                     isDown = true;
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                if (isInHexagon(mPath, point)) {
+                Point upPoint = new Point((int) event.getX(), (int) event.getY());
+                if (isInHexagon(mPath, upPoint)) {
                     isUp = true;
                 }
-                if (isDown&&isUp) {
-                    if (mListener!=null) {
+                if (isDown && isUp) {
+                    if (mListener != null) {
                         mListener.clickHexagon(this);
                     }
                     isDown = false;
@@ -292,8 +277,6 @@ public class VyHexagonImageView extends AppCompatImageView {
                 }
                 break;
             default:
-                isDown = false;
-                isUp = false;
                 break;
         }
         return true;
@@ -319,7 +302,7 @@ public class VyHexagonImageView extends AppCompatImageView {
         void clickHexagon(View view);
     }
 
-    public void setOnClickHexagonListener(OnClickHexagonListener listener){
+    public void setOnClickHexagonListener(OnClickHexagonListener listener) {
         mListener = listener;
     }
 }
