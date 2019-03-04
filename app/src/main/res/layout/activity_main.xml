@@ -162,5 +162,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="电路图"/>
+
+        <com.nkw.customview.view.CustomImageView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@mipmap/pic"/>
     </LinearLayout>
 </ScrollView>
