@@ -27,6 +27,16 @@ public class MainActivity extends BaseActivity {
         goBarrageGroup();
         goBtnRadar();
         goVyWoQu();
+        goLayoutManager();
+    }
+
+    private void goLayoutManager() {
+        findViewById(R.id.btn_layoutManager).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mActivity,CustomLayoutManagerActivity.class));
+            }
+        });
     }
 
     private void goVyWoQu() {
