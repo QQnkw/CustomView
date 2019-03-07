@@ -20,6 +20,7 @@ public class DiamondLayoutManager extends RecyclerView.LayoutManager {
 
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        Log.d("NKW--->","onLayoutChildren");
         if (getItemCount() == 0) {//没有Item，界面空着吧
             detachAndScrapAttachedViews(recycler);//轻量回收
             return;

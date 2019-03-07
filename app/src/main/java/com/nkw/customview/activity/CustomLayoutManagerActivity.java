@@ -35,9 +35,8 @@ public class CustomLayoutManagerActivity extends AppCompatActivity {
             public VhImageHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 Log.d("NKW--->","onCreateViewHolder");
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_custom_layout_manager, parent, false);
-                view.setLayoutParams(new RecyclerView.LayoutParams(recyclerView.getWidth()/2,recyclerView.getWidth()
-                        /2));
-                return new VhImageHolder(view);
+                int width = recyclerView.getWidth() / 2;
+                return new VhImageHolder(view,width);
             }
 
             @Override
@@ -45,6 +44,7 @@ public class CustomLayoutManagerActivity extends AppCompatActivity {
                 Log.d("NKW--->","onBindViewHolder");
                 holder.mTv.setText(position+"");
                 int i = mRandom.nextInt(10);
+                holder.mIv.setImageResource(R.mipmap.pic);
                 GlideUtils.loadImage(CustomLayoutManagerActivity.this, AppLocalData.imgUrlArr[i], holder.mIv);
             }
 
@@ -57,13 +57,16 @@ public class CustomLayoutManagerActivity extends AppCompatActivity {
 
     private static class VhImageHolder extends RecyclerView.ViewHolder{
 
-        TextView mTv;
+        TextView        mTv;
         CustomImageView mIv;
 
-        public VhImageHolder(View itemView) {
+        public VhImageHolder(View itemView, int width) {
             super(itemView);
             mIv = itemView.findViewById(R.id.iv);
             mTv = itemView.findViewById(R.id.tv);
+            ViewGroup.LayoutParams layoutParams = mIv.getLayoutParams();
+            layoutParams.width = width;
+            layoutParams.height = width;
         }
     }
 }
