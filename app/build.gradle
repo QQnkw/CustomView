@@ -41,4 +41,7 @@ dependencies {
     //黄油刀
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //权限请求
+//    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
 }

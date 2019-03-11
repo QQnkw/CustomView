@@ -28,6 +28,16 @@ public class MainActivity extends BaseActivity {
         goBtnRadar();
         goVyWoQu();
         goLayoutManager();
+        goCustomCamera();
+    }
+
+    private void goCustomCamera() {
+        findViewById(R.id.btn_custom_camera).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mActivity,CameraActivity.class));
+            }
+        });
     }
 
     private void goLayoutManager() {
