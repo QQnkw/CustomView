@@ -35,7 +35,7 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custom_camera);
+        setContentView(R.layout.activity_camera);
         mActivity = this;
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions.request(Manifest.permission.CAMERA,
@@ -51,6 +51,20 @@ public class CameraActivity extends AppCompatActivity {
                         }
                     }
                 });
+        systemCamera();
+        customCamera();
+    }
+
+    private void customCamera() {
+        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity,CustomCameraActivity.class));
+            }
+        });
+    }
+
+    private void systemCamera() {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,9 +74,6 @@ public class CameraActivity extends AppCompatActivity {
                 } else {
                     uri = Uri.fromFile(mFile);
                 }
-                /*mFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+
-                File.separator + System.currentTimeMillis()
-                        + ".jpg";*/
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 startActivityForResult(intent, 1);

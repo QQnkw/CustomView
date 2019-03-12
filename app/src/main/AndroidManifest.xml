@@ -14,7 +14,10 @@
 
     <!-- 增加文件存储和访问摄像头的权限 -->
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+
     <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
 
     <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
     <uses-permission android:name="android.permission.GET_TASKS"/>
@@ -73,6 +76,12 @@
         <activity android:name=".activity.CustomLayoutManagerActivity">
         </activity>
         <activity android:name=".activity.CameraActivity">
+        </activity>
+        <activity android:name=".activity.CustomCameraActivity"/>
+        <activity android:name=".activity.Camera1Activity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.Camera2Activity">
         </activity>
     </application>
 
