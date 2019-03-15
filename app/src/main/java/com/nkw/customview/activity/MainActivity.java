@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.nkw.customview.R;
 import com.nkw.customview.video.X5WebViewActivity;
+import com.nkw.customview.view.MatchingTimeDrawable;
 import com.nkw.customview.view.RefreshLikeIOSView;
 import com.nkw.customview.view.TabLayoutVY;
 import com.nkw.customview.view.VyLoading;
@@ -29,6 +30,7 @@ public class MainActivity extends BaseActivity {
         goVyWoQu();
         goLayoutManager();
         goCustomCamera();
+        findViewById(R.id.iv_custom_drawable).setBackground(new MatchingTimeDrawable(this));
     }
 
     private void goCustomCamera() {

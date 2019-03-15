@@ -55,6 +55,7 @@
                 android:gravity="center"
                 android:text="TabFour"/>
         </com.nkw.customview.view.TabLayoutVY>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -164,6 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="自定义layoutManager"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -176,6 +178,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="自定义相机"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="自定义Drawable"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/iv_custom_drawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="50dp"/>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
