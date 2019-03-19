@@ -11,7 +11,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context=".activity.MainActivity">
-
+        <com.nkw.customview.view.VyNewHexagonImageView
+            android:layout_margin="@dimen/dp_10"
+            android:src="@mipmap/pic"
+            android:layout_width="180dp"
+            android:layout_height="180dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -199,6 +203,5 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="50dp"/>
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>
