@@ -19,7 +19,7 @@ public class VyNewHexagonImageView extends android.support.v7.widget.AppCompatIm
     private Path   mPath         = new Path();
     private Paint  mBorderPaint;
     private Matrix mShaderMatrix = new Matrix();
-    private int mBorderWidth = 10;
+    private int    mBorderWidth  = 10;
 
     public VyNewHexagonImageView(Context context) {
         this(context, null);
@@ -35,19 +35,18 @@ public class VyNewHexagonImageView extends android.support.v7.widget.AppCompatIm
     }
 
     private void initPaint(Context context) {
-        CornerPathEffect cornerPathEffect = new CornerPathEffect(20);
         mBitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBitmapPaint.setDither(true);
         mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBorderPaint.setStyle(Paint.Style.STROKE);
-        initBorderWidthAndColor(mBorderWidth,0xFFD8D8D8);
-        mBitmapPaint.setPathEffect(cornerPathEffect);
-        mBorderPaint.setPathEffect(cornerPathEffect);
+        initBorderWidthAndColor(mBorderWidth, 0xFFD8D8D8,new CornerPathEffect(20));
     }
 
-    private void initBorderWidthAndColor(int borderWidth, int color) {
+    private void initBorderWidthAndColor(int borderWidth, int color, CornerPathEffect cornerPathEffect) {
         mBorderPaint.setStrokeWidth(borderWidth);
         mBorderPaint.setColor(color);
+        mBitmapPaint.setPathEffect(cornerPathEffect);
+        mBorderPaint.setPathEffect(cornerPathEffect);
     }
 
     @Override
@@ -55,7 +54,7 @@ public class VyNewHexagonImageView extends android.support.v7.widget.AppCompatIm
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
-        int size = Math.max(width, height);
+        int size = Math.min(width, height);
         setMeasuredDimension(size, size);
     }
 
@@ -93,7 +92,7 @@ public class VyNewHexagonImageView extends android.support.v7.widget.AppCompatIm
         mPath.lineTo(d, r * 3);
         mPath.lineTo(d, r);
         mPath.close();
-        mPath.offset(mBorderWidth/2, mBorderWidth/2);
+        mPath.offset(mBorderWidth / 2, mBorderWidth / 2);
     }
 
     @Override
@@ -123,9 +122,9 @@ public class VyNewHexagonImageView extends android.support.v7.widget.AppCompatIm
         }
     }
 
-    public void setBorderWidthAndColor(int borderWidth,int borderColor) {
+    public void setBorderWidthAndColor(int borderWidth, int borderColor,int cornerRadius) {
         mBorderWidth = borderWidth;
-        initBorderWidthAndColor(mBorderWidth, borderColor);
+        initBorderWidthAndColor(mBorderWidth, borderColor, new CornerPathEffect(cornerRadius));
     }
 
 
