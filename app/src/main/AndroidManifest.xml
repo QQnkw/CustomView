@@ -50,7 +50,7 @@
         <activity android:name=".activity.FourGridViewActivity">
         </activity>
         <activity
-            android:name=".video.X5WebViewActivity"
+            android:name=".activity.WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:hardwareAccelerated="true">
         </activity>
