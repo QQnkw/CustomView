@@ -36,4 +36,5 @@
     <color name="app_grayDCDBDB">#DCDBDB</color>
     <color name="app_grayC4C2C2">#C4C2C2</color>
     <color name="app_grayF0F0F0">#F0F0F0</color>
+    <color name="shimmer_color">#a2878787</color>
 </resources>
