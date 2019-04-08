@@ -27,7 +27,11 @@
             android:layout_width="match_parent"
             android:layout_height="300dp">
 
-            <View
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/app_white_fff"
+                android:textSize="30sp"
+                android:text="页面加载过度动画"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorAccent"/>
