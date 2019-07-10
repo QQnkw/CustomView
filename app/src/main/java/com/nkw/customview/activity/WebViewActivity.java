@@ -67,7 +67,7 @@ public class WebViewActivity extends AppCompatActivity {
                 super.onReceivedHttpError(view, request, errorResponse);
             }
         });
-        mWebView.loadUrl("file:///android_asset/deeplink.html");
+        mWebView.loadUrl("file:///android_asset/deeplink.html");//演示deepLink
         //		webView.loadUrl("https://tv.sohu.com/upload/static/share/share_play.html#106903751_9114930_0_9001_0");
         //		webView.loadUrl("https://v.qq.com/txp/iframe/player.html?vid=i0737bacynk");
         //        webView.loadUrl("http://player.youku.com/embed/XMzg1MzkyMzk0MA==");

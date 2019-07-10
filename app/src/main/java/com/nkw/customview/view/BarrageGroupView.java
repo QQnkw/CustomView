@@ -1,4 +1,4 @@
-package com.nkw.customview.view.barrage;
+package com.nkw.customview.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -25,20 +24,20 @@ import java.util.List;
 import java.util.Random;
 
 public class BarrageGroupView extends RelativeLayout {
-    private int mWidth;
-    private int mHeight;
-    private Context mContext;
+    private int                        mWidth;
+    private int                        mHeight;
+    private Context                    mContext;
     private HashMap<Integer, TextView> mRowTextViewMap;
-    private ArrayList<String> mRowList;
+    private ArrayList<String>          mRowList;
     private static final int DEFAULT_ROW_NUM = 3;
-    private int mRowNum;
-    private Random mRandom;
-    private Handler mHandler;
-    private int mHeightMeasure;
-    private int mWidthMeasure;
+    private int          mRowNum;
+    private Random       mRandom;
+    private Handler      mHandler;
+    private int          mHeightMeasure;
+    private int          mWidthMeasure;
     private List<String> mList;
-    private boolean isRunning = true;
-    private int MESSAGE_ANIMATION = 123;
+    private boolean isRunning         = true;
+    private int     MESSAGE_ANIMATION = 123;
 
     public BarrageGroupView(Context context) {
         this(context, null);
@@ -51,10 +50,6 @@ public class BarrageGroupView extends RelativeLayout {
     public BarrageGroupView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
-    }
-
-    public BarrageGroupView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        this(context, attrs, defStyleAttr);
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -70,35 +65,37 @@ public class BarrageGroupView extends RelativeLayout {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                Log.d("NKW--->","handleMessage");
                 if (msg.what == MESSAGE_ANIMATION) {
                     if (isRunning && mList != null && !mList.isEmpty()) {
                         int showRowNum = mRandom.nextInt(100) % mRowNum;
                         while (mRowList.contains(showRowNum + "")) {
                             if (mRowList.size() == mRowNum) {
-                                mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 50);
+                                mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 500);
                                 //                            mHandler.post(this);
                                 return;
                             } else {
                                 showRowNum = mRandom.nextInt(100) % mRowNum;
                             }
+
+                            //                            LogUtils.d("NKW--->弹幕--->"+showRowNum);
                         }
-                        mRowList.add(showRowNum + "");
                         TextView textView = mRowTextViewMap.get(showRowNum);
-//                        Log.d("NKW--init->",textView==null?"空":"不为空"+showRowNum);
                         if (textView == null) {
                             mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 500);
+                            //                            LogUtils.d("NKW--->弹幕--->控件为空");
                             return;
                         }
+                        mRowList.add(showRowNum + "");
                         if (index >= mList.size()) {
                             index %= mList.size();
                         }
-                        textView.setText(mList.get(index));
+                        String text = mList.get(index);
+                        textView.setText(text);
                         textView.setTag(showRowNum + "");
                         addView(textView);
                         index++;
                         animatorAlphaAndTranslation(textView);
-                        mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 100);
+                        mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 1000);
                     }
                 }
             }
@@ -108,7 +105,6 @@ public class BarrageGroupView extends RelativeLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        Log.d("NKW--->","onSizeChanged");
         mWidth = w;
         mHeight = h;
         createRowTextView();
@@ -158,7 +154,7 @@ public class BarrageGroupView extends RelativeLayout {
         }
         //多余的空间设置给textView的padding
         textView.setPadding(difHeight / 2, difHeight / 2, difHeight / 2, difHeight / 2);
-                textView.setBackgroundResource(R.color.app_purple_6445F3);
+        //        textView.setBackgroundResource(R.color.app_blue3A75ED);
         LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lp.topMargin = (mRowNum - 1) * (height + difHeight);
         textView.setLayoutParams(lp);
@@ -167,7 +163,7 @@ public class BarrageGroupView extends RelativeLayout {
             TextView tv = new TextView(mContext);
             tv.setGravity(Gravity.CENTER);
             tv.setPadding(difHeight / 2, difHeight / 2, difHeight / 2, difHeight / 2);
-                        tv.setBackgroundResource(R.color.app_purple_6445F3);
+            //            tv.setBackgroundResource(R.color.app_blue3A75ED);
             LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             params.topMargin = i * (height + difHeight);
             tv.setLayoutParams(params);
@@ -178,10 +174,9 @@ public class BarrageGroupView extends RelativeLayout {
     private int index = 0;
 
     public void startBarrage() {
-        Log.d("NKW--->","startBarrage");
         isRunning = true;
         if (!mHandler.hasMessages(MESSAGE_ANIMATION)) {
-            mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 50);
+            mHandler.sendEmptyMessageDelayed(MESSAGE_ANIMATION, 500);
         }
     }
 

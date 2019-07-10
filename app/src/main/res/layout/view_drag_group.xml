@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.nkw.customview.view.DragGroupLyout
+<com.nkw.customview.view.DragGroupView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dragLayout"
@@ -25,4 +25,4 @@
             android:text="显示/隐藏"/>
     </LinearLayout>
 
-</com.nkw.customview.view.DragGroupLyout>
+</com.nkw.customview.view.DragGroupView>

@@ -2,72 +2,53 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="5dp"
     android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
     android:background="@drawable/bg_shadow2"
     android:orientation="vertical">
     <!--android:background="@color/app_white_fff"-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv"
-            style="@style/Layout_Wrap_Wrap"
-            android:text="123124234324"
-            android:textSize="@dimen/sp_18"/>
-
-        <Button
-            android:id="@+id/btn"
-            style="@style/Layout_Wrap_Wrap"
-            android:layout_width="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="@dimen/dp_20"
-            android:text="pop"
-            android:textSize="@dimen/sp_10"/>
-    </RelativeLayout>
+    <Button
+        android:id="@+id/btn"
+        style="@style/Layout_Wrap_Wrap"
+        android:layout_width="50dp"
+        android:layout_gravity="right"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:text="pop"
+        android:textSize="@dimen/sp_10"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NKW"
-        android:textSize="@dimen/sp_18"/>
+        android:text="原始文本"
+        android:textColor="@color/colorPrimary"/>
 
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        tools:text="askjdfhjksjnfkdnfms,d"
         />
-    <com.nkw.customview.view.text.AlignTextView
-        android:id="@+id/align_tv"
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="可展开收缩文本"/>
+
+    <com.nkw.customview.view.VyTextView
+        android:id="@+id/tv_expand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
-    <com.nkw.customview.view.ExpandableTextView
-        android:id="@+id/etv"
-        app:etv_MaxLinesOnShrink="4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#22aaaaaa"/>
-    <com.nkw.customview.view.fourGridView.VyFourGridView
-        android:id="@+id/four_grid_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:background="#22aaaaaa"
+        app:maxShowLines="4"
+        tools:text="akjsdnsfkjjndkndf"/>
 
-    </com.nkw.customview.view.fourGridView.VyFourGridView>
-
-    <!--<TextView
+    <com.nkw.customview.view.fourGridView.ImageViewGroup
+        android:id="@+id/custom_grid_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CF"/>
-
-    <com.nkw.customview.view.MultiImageLayout
-        android:id="@+id/multiImageLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </com.nkw.customview.view.MultiImageLayout>-->
+        android:layout_height="wrap_content"/>
 </LinearLayout>

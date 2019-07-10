@@ -4,25 +4,15 @@
         <attr name="underLineColor" format="color"/>
         <attr name="underLineHeight" format="dimension"/>
     </declare-styleable>
-    <!--显示更多TextView，来自网络-->
-    <declare-styleable name="ExpandableTextView">
-        <attr name="etv_MaxLinesOnShrink" format="reference|integer"/>
-        <attr name="etv_EllipsisHint" format="reference|string"/><!--default is ...-->
-        <attr name="etv_ToExpandHint" format="reference|string"/><!--"to expand" hint string, default is "Expand"-->
-        <attr name="etv_ToShrinkHint" format="reference|string"/><!--"to shrink" hint string, default is "Shrink"-->
-        <attr name="etv_GapToExpandHint" format="reference|string"/><!--gap between "toExpandHint" and "trimmed text"-->
-        <attr name="etv_GapToShrinkHint" format="reference|string"/><!--gap between "toShrinkHint" and "trimmed text"-->
-        <attr name="etv_EnableToggle" format="reference|boolean"/><!--if toggle the state when click ExpandTextView-->
-        <attr name="etv_EnableExpandOrShrink" format="reference|boolean"/><!--enable Expand or shrink-->
-        <attr name="etv_ToExpandHintShow" format="reference|boolean"/><!--if show "toExpandHint"-->
-        <attr name="etv_ToShrinkHintShow" format="reference|boolean"/><!--if show "toShrinkHint"-->
-        <attr name="etv_ToExpandHintColor" format="reference|color"/><!--text color of "toExpandHint"-->
-        <attr name="etv_ToShrinkHintColor" format="reference|color"/><!--text color of "toShrinkHint"-->
-        <attr name="etv_ToExpandHintColorBgPressed" format="reference|color"/><!--background color if "toExpandHint" pressed-->
-        <attr name="etv_ToShrinkHintColorBgPressed" format="reference|color"/><!--background color if "toShrinkHint" pressed-->
-        <attr name="etv_InitState" format="enum"><!--init state, default is shrink-->
-            <enum name="shrink" value="0"/>
-            <enum name="expand" value="1"/>
+    <!--可展开或搜索的文本,对于表情大小进行了处理-->
+    <declare-styleable name="VyTextView">
+        <attr name="maxShowLines" format="integer"/>
+        <attr name="suffixText" format="string"/>
+        <attr name="suffixColor" format="color"/>
+        <attr name="clickSpanEnable" format="boolean"/>
+        <attr name="clickSpanTo" format="enum">
+            <enum name="expand" value="0"/>
+            <enum name="jump" value="1"/>
         </attr>
     </declare-styleable>
     <!--来自网络-->
@@ -45,28 +35,12 @@
         <attr name="pstsShouldExpand" format="boolean"/>
         <attr name="pstsTextAllCaps" format="boolean"/>
     </declare-styleable>
-
-    <declare-styleable name="MultiImageLayout">
-        <attr name="layout_mode">
-            <enum name="custom" value="0"/>
-            <enum name="grid" value="1"/>
-        </attr>
-        <attr name="wh_ratio" format="float"/>
-    </declare-styleable>
     <declare-styleable name="VyLoading">
         <attr name="arcWidth" format="dimension"/>
         <attr name="arcColor" format="color"/>
     </declare-styleable>
     <declare-styleable name="BarrageGroupView">
         <attr name="rowNum" format="integer"/>
-    </declare-styleable>
-    <!-- 末行对齐方式 -->
-    <declare-styleable name="AlignTextView">
-        <attr name="align" format="enum">
-            <enum name="left" value="0"/>
-            <enum name="center" value="1"/>
-            <enum name="right" value="2"/>
-        </attr>
     </declare-styleable>
     <declare-styleable name="ShimmerView">
         <attr name="shimmer_color" format="color|reference"/>

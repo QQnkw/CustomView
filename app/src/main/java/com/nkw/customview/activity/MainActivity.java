@@ -1,9 +1,11 @@
 package com.nkw.customview.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.nkw.customview.R;
 import com.nkw.customview.view.MatchingTimeDrawable;
@@ -11,9 +13,16 @@ import com.nkw.customview.view.RefreshLikeIOSView;
 import com.nkw.customview.view.TabLayoutVY;
 import com.nkw.customview.view.VyLoading;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
 public class MainActivity extends BaseActivity {
     private Handler mHandler = new Handler();
     private int     mNum     = 0;
+    private MatchingTimeDrawable mMatchingTimeDrawable;
 
     @Override
     protected void initViewSet() {
@@ -29,12 +38,15 @@ public class MainActivity extends BaseActivity {
         goVyWoQu();
         goLayoutManager();
         goCustomCamera();
-        findViewById(R.id.iv_custom_drawable).setBackground(new MatchingTimeDrawable(this));
-        //		webView.loadUrl("https://tv.sohu.com/upload/static/share/share_play.html#106903751_9114930_0_9001_0");
-        //		webView.loadUrl("https://v.qq.com/txp/iframe/player.html?vid=i0737bacynk");
-        //        webView.loadUrl("http://player.youku.com/embed/XMzg1MzkyMzk0MA==");
-        //爱奇艺视频播放按钮会重叠
-        //        webView.loadUrl("http://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=3675f352a8c555371731c1b09ce8d298&tvId=24357822709&accessToken=2.f22860a2479ad60d8da7697274de9346&appKey=3955c3425820435e86d0f4cdfe56f5e7&appId=1368&height=100%&width=100%");
+        customDrawable();
+        //读取APK中的写入的信息,配合TestMain中的方法一起使用
+        String unfinishedURL = getUnfinishedURL(this);
+        Toast.makeText(this,unfinishedURL,Toast.LENGTH_LONG).show();
+    }
+
+    private void customDrawable() {
+        mMatchingTimeDrawable = new MatchingTimeDrawable(this);
+        findViewById(R.id.iv_custom_drawable).setBackground(mMatchingTimeDrawable);
     }
 
     private void goCustomCamera() {
@@ -147,6 +159,43 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-
-
+    public static String getUnfinishedURL(Context context) {
+        //获取缓存的 APK 文件
+        File file = new File(context.getPackageCodePath());
+        byte[] bytes;
+        RandomAccessFile accessFile = null;
+        // 从指定的位置找到 WriteAPK.java 写入的信息
+        try {
+            accessFile = new RandomAccessFile(file, "r");
+            long index = accessFile.length();
+            bytes = new byte[2];
+            index = index - bytes.length;
+            accessFile.seek(index);
+            accessFile.readFully(bytes);
+            int contentLength = stream2Short(bytes, 0);
+            bytes = new byte[contentLength];
+            index = index - bytes.length;
+            accessFile.seek(index);
+            accessFile.readFully(bytes);
+            return new String(bytes, "utf-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (accessFile != null) {
+                try {
+                    accessFile.close();
+                } catch (IOException ignored) {
+                    ignored.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+    public static short stream2Short(byte[] stream, int offset) {
+        ByteBuffer buffer = ByteBuffer.allocate(2);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
+        buffer.put(stream[offset]);
+        buffer.put(stream[offset + 1]);
+        return buffer.getShort(0);
+    }
 }
