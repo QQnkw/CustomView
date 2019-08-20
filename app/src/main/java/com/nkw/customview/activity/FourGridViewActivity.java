@@ -3,6 +3,7 @@ package com.nkw.customview.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -52,6 +54,23 @@ public class FourGridViewActivity extends BaseActivity {
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, FourGridViewActivity.class));
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("NKW","FourGridViewActivity:onSaveInstanceState");
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState!=null) {
+            String string = savedInstanceState.getString("NKW");
+            Toast.makeText(this,"FourGridViewActivity:onRestoreInstanceState--->"+string,Toast.LENGTH_LONG).show();
+        }
+    }
+
 
     private static class FourGridViewAdapter extends RecyclerView.Adapter<FourGridViewHolder> {
 

@@ -2,6 +2,7 @@ package com.nkw.customview.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -197,5 +198,30 @@ public class MainActivity extends BaseActivity {
         buffer.put(stream[offset]);
         buffer.put(stream[offset + 1]);
         return buffer.getShort(0);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+            outState.putString("NKW","MainActivity:onSaveInstanceState");
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState!=null) {
+            String string = savedInstanceState.getString("NKW");
+            Toast.makeText(this,"MainActivity:onRestoreInstanceState--->"+string,Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState!=null) {
+            String string = savedInstanceState.getString("NKW");
+            Toast.makeText(this,"MainActivity:onCreate--->"+string,Toast.LENGTH_LONG).show();
+        }
     }
 }
