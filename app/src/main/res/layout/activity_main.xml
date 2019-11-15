@@ -191,6 +191,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="自定义layoutManager"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="夜间模式"
+            android:textStyle="bold"/>
+        <Button
+            android:id="@+id/btn_night"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="夜间模式"/>
 
         <TextView
             android:layout_width="match_parent"

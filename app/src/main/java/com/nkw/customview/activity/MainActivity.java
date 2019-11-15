@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -24,7 +25,10 @@ public class MainActivity extends BaseActivity {
     private Handler mHandler = new Handler();
     private int     mNum     = 0;
     private MatchingTimeDrawable mMatchingTimeDrawable;
-
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
     @Override
     protected void initViewSet() {
         super.initViewSet();
@@ -43,6 +47,20 @@ public class MainActivity extends BaseActivity {
         //读取APK中的写入的信息,配合TestMain中的方法一起使用
         String unfinishedURL = getUnfinishedURL(this);
         Toast.makeText(this,unfinishedURL,Toast.LENGTH_LONG).show();
+        changeNightType();
+    }
+
+    /**
+     * 夜间模式
+     */
+    private void changeNightType() {
+        findViewById(R.id.btn_night).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                recreate();
+            }
+        });
     }
 
     private void customDrawable() {
@@ -93,11 +111,6 @@ public class MainActivity extends BaseActivity {
                 BarrageGroupViewActivity.startActivity(mActivity);
             }
         });
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_main;
     }
 
     private void goDragLayout() {
