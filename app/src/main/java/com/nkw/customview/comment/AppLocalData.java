@@ -9,14 +9,21 @@ public class AppLocalData {
             "http://rs3.sinahk.net/cap/3/2017/12/14/d/d42a1c32911120010d37483aa9fda535.jpg",
             "http://06.imgmini.eastday.com/mobile/20161116/20161116083543_b4db847476d6fb93f8575e35d66e46c4_4.jpeg",*/
 
-    "https://tc.sinaimg.cn/maxwidth.800/tc.service.weibo.com/dingyue_nosdn_127_net/65bf3fb5874c45c7c278433e1b725319.jpg",
-    "https://s1.imgs.cc/img/aaaaaQ9LQ.jpg",
-    "http://ylzx.ufile.ucloud.com.cn/20180316/20180316205417652902.jpg",
-    "http://www.sinaimg.cn/dy/slidenews/21_img/2016_14/1844_4948610_186244.jpg",
-    "http://images.xuejuzi.cn/1612/1_161230185104_1.jpg",
-    "https://cdn1-manfashion.techbang.com/system/images/55259/medium/619c62e0a69c1263ac045a677a2a2dde.jpg",
-    "https://pic.qqtn.com/up/2017-11/2017110215093899991.jpg",
-    "http://88razzi.com/sites/default/files/styles/large/public/images/2018/12/05/node-5999/IMG0025116ac9cf49380417528_500_750.jpg",
-            "http://cdn.clm02.com/ezvivi.com/290760/290760_8.png",
-    "https://06imgmini.eastday.com/mobile/20190121/20190121231907_80a6668b1d521e066116ce50287ff060_1.jpeg"};
+    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574052532258&di=eefc985bc7e597f7a708cee47d0cec3f&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F03%2F20170603213152_sKuLT.jpeg",
+
+    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574052584805&di=fd0564488925d2474178d1eb86ea1940&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F190898cd3958ac8d8cab33a98e18b78abe8bec6223bf3-hzFhAc_fw658",
+
+    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574053366987&di=2076bce5806ee226bde2ee5e799e618a&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D1402158123%2C1175715032%26fm%3D214%26gp%3D0.jpg",
+
+    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574053387191&di=53d89bec7723425c4ba5502629686249&imgtype=0&src=http%3A%2F%2Fcdn4.hbimg.cn%2Fstore%2Fwm%2Fbigfiles%2FD12EDDBDEDC49AB083FECFC1.jpg",
+
+    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574053404427&di=31fc180f9366a7366ba7d7c8f2f30d27&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fpmop%2F2017%2F1214%2F756F54079DFC35207C23E6FE1AA1BC2CA1018BB6_size70_w600_h450.jpeg",
+
+    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574053422243&di=a7141ccf4f3d470256b3374ca42ebb79&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20121101%2FImg356358785.jpg",
+
+    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574053438520&di=129b7885cc884576f26ee6f012d0ecc6&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F8e012a3f57516117ce47d741ecdf71a45a30029a1169db-o8fSMW_fw658",
+
+    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574053454005&di=685d3aacbc2b85d3084874ea49a23e7d&imgtype=0&src=http%3A%2F%2Fpic8.nipic.com%2F20100805%2F5484601_004944122176_2.jpg",
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574053474553&di=26a2fa9aeca49431163200aeb3fb101e&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fcae36b1bcf0b4462c9e1838e35d80bd605e4e49550408-5nfNlC_fw658",
+    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574053515881&di=a7692e9630ce40aa9b56491f36b44c46&imgtype=0&src=http%3A%2F%2Fi3.sinaimg.cn%2Fgm%2F2011%2F0504%2FU5213P115DT20110504094051.jpg"};
 }

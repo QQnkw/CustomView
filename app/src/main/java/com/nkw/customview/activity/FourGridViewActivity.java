@@ -22,6 +22,8 @@ import com.bumptech.glide.request.transition.Transition;
 import com.nkw.customview.R;
 import com.nkw.customview.comment.AppLocalData;
 import com.nkw.customview.utils.GlideUtils;
+import com.nkw.customview.view.NineGridImage.BaseNineGridImageAdapter;
+import com.nkw.customview.view.NineGridImage.NineGridImageLayout;
 import com.nkw.customview.view.VyTextView;
 import com.nkw.customview.view.fourGridView.ImageViewGroup;
 import com.nkw.customview.view.popupwindow.PopWindowAboutPost;
@@ -134,6 +136,27 @@ public class FourGridViewActivity extends BaseActivity {
             });
             holder.mTvContent.setText(mPoems[position]);
             holder.mTvExpand.setContent(mPoems[position]);
+            holder.mNineGrid.setAdapter(new BaseNineGridImageAdapter() {
+                @Override
+                protected int getImageCount() {
+                    return list.size();
+                }
+
+                @Override
+                protected float getFirstImagePer() {
+                    return 1.5f;
+                }
+
+                @Override
+                protected String getImageUrl(int position) {
+                    return list.get(position);
+                }
+
+                @Override
+                protected void bindData(int position, ImageView imageView, NineGridImageLayout nineGridImageLayout) {
+                    GlideUtils.loadImage(mContext, list.get(position), imageView);
+                }
+            });
         }
 
         @Override
@@ -164,6 +187,7 @@ public class FourGridViewActivity extends BaseActivity {
         private final VyTextView     mTvExpand;
         private       ImageViewGroup mCustomGridView;
         private final Button         mBtn;
+        private final NineGridImageLayout mNineGrid;
 
         public FourGridViewHolder(View itemView) {
             super(itemView);
@@ -171,6 +195,7 @@ public class FourGridViewActivity extends BaseActivity {
             mTvContent = itemView.findViewById(R.id.tv_content);
             mCustomGridView = itemView.findViewById(R.id.custom_grid_view);
             mBtn = itemView.findViewById(R.id.btn);
+            mNineGrid = itemView.findViewById(R.id.nine_grid);
         }
     }
 

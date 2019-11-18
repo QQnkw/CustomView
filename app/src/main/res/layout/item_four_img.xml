@@ -47,8 +47,27 @@
         app:maxShowLines="4"
         tools:text="akjsdnsfkjjndkndf"/>
 
+    <View
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_4"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_5"/>
+
     <com.nkw.customview.view.fourGridView.ImageViewGroup
         android:id="@+id/custom_grid_view"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_4"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_5"/>
+
+    <com.nkw.customview.view.NineGridImage.NineGridImageLayout
+        android:id="@+id/nine_grid"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>
