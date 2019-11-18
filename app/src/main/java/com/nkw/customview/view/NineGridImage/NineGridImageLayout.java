@@ -25,7 +25,9 @@ public class NineGridImageLayout extends ViewGroup {
     private int mChildRow;//将展示的行数
     private int mChildColumn;//将展示的列数
     private BaseNineGridImageAdapter mAdapter;//内部view的适配器
+    private NineGridImageAdapter mNineGridImageAdapter;//内部view的适配器
     private AdapterObserver mDataSetObserver;//观察者
+    private int[] mChildAndSpaceSumWidthHeight = new int[2];//所有子空间加间隙的总宽高
     // 缓存器，存储 item，用于复用
     private List<SoftReference<TypeImageView>> mCacheViewList;
     private OnImageItemClickListener mOnImageItemClickListener;
@@ -57,10 +59,10 @@ public class NineGridImageLayout extends ViewGroup {
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         if (mAdapter == null || getChildCount() == 0) {
-            setMeasuredDimension(measureWidth==MeasureSpec.EXACTLY?measureWidth:getPaddingStart()+getPaddingEnd(),
+            setMeasuredDimension(widthMode == MeasureSpec.EXACTLY ? measureWidth : getPaddingStart() + getPaddingEnd(),
                     heightMode == MeasureSpec.EXACTLY ?
-                    measureHeight :
-                    getPaddingTop() + getPaddingBottom());
+                            measureHeight :
+                            getPaddingTop() + getPaddingBottom());
             return;
         }
         //以宽为基准
@@ -111,9 +113,9 @@ public class NineGridImageLayout extends ViewGroup {
                 }
             }
         }
-        int widthMeasure =
-                getMeasureChildAfterWidthAndHeight(childCount)[0] + getPaddingLeft() + getPaddingRight();
-        int heightMeasure = getMeasureChildAfterWidthAndHeight(childCount)[1] + getPaddingTop() + getPaddingBottom();
+        computeChildAndSpaceSumWidthHeight(childCount);
+        int widthMeasure = mChildAndSpaceSumWidthHeight[0] + getPaddingLeft() + getPaddingRight();
+        int heightMeasure = mChildAndSpaceSumWidthHeight[1] + getPaddingTop() + getPaddingBottom();
         setMeasuredDimension(widthMode == MeasureSpec.EXACTLY ? measureWidth : widthMeasure, heightMode == MeasureSpec.EXACTLY ? measureHeight : heightMeasure);
     }
 
@@ -142,19 +144,17 @@ public class NineGridImageLayout extends ViewGroup {
      * @param childCount
      * @return
      */
-    private int[] getMeasureChildAfterWidthAndHeight(int childCount) {
-        int[] widthHeightArr = new int[2];
+    private void computeChildAndSpaceSumWidthHeight(int childCount) {
         // 只有一个 item 时
         View childAt = getChildAt(0);
         if (childCount == 1) {
             mChildRow = mChildColumn = 1;
-            widthHeightArr[0] = childAt.getMeasuredWidth();
-            widthHeightArr[1] = childAt.getMeasuredHeight();
-            return widthHeightArr;
+            mChildAndSpaceSumWidthHeight[0] = childAt.getMeasuredWidth();
+            mChildAndSpaceSumWidthHeight[1] = childAt.getMeasuredHeight();
         } else {
             // 判断 item 的个数是否可以开平方（即判断是否可以将 itemView 拼成正方形放置）
             int temp = (int) Math.sqrt(childCount);
-            Log.d(TAG,"getMeasureChildAfterWidthAndHeight--->childCount:"+childCount+"---temp:"+temp);
+            Log.d(TAG, "getMeasureChildAfterWidthAndHeight--->childCount:" + childCount + "---temp:" + temp);
             if (temp * temp == childCount) {
                 // 如果 item 的个数不满一行，则不做正方形放置，否则做正方形放置
                 if (childCount <= 3) {
@@ -166,11 +166,27 @@ public class NineGridImageLayout extends ViewGroup {
                 }
             } else {
                 mChildRow = childCount / 3 + (childCount % 3 == 0 ? 0 : 1);
-                mChildColumn = 3;
+                mChildColumn = childCount < 3 ? childCount : 3;
             }
-            widthHeightArr[0] = (int) (mChildColumn * childAt.getMeasuredWidth() + (mChildColumn - 1) * mSpaceWidth);
-            widthHeightArr[1] = (int) (mChildRow * childAt.getMeasuredWidth() + (mChildRow - 1) * mSpaceWidth);
-            return widthHeightArr;
+            mChildAndSpaceSumWidthHeight[0] = (int) (mChildColumn * childAt.getMeasuredWidth() + (mChildColumn - 1) * mSpaceWidth);
+            mChildAndSpaceSumWidthHeight[1] = (int) (mChildRow * childAt.getMeasuredWidth() + (mChildRow - 1) * mSpaceWidth);
+        }
+    }
+
+    public void setDataAndItemListener(List<String> dataList) {
+        removeAllViews();
+        if (dataList == null || dataList.isEmpty()) {
+
+        }else {
+            if (mNineGridImageAdapter==null) {
+                mNineGridImageAdapter = new NineGridImageAdapter(dataList);
+            }else {
+                mNineGridImageAdapter.setNewData(dataList);
+            }
+            if (mCacheViewList==null) {
+                mCacheViewList = new ArrayList<>();
+            }
+
         }
     }
 

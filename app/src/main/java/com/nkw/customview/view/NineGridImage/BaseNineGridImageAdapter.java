@@ -60,4 +60,5 @@ public abstract class BaseNineGridImageAdapter {
     }
 
     protected abstract void bindData(int position, ImageView imageView, NineGridImageLayout nineGridImageLayout);
+
 }
