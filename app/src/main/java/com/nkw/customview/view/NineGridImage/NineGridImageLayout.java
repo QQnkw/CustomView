@@ -1,36 +1,30 @@
 package com.nkw.customview.view.NineGridImage;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NineGridImageLayout extends ViewGroup {
     private final String TAG = NineGridImageLayout.class.getSimpleName();
-    private float mSingleImageVerticalPer = 0.6f;//单图的图片宽小于高时,图片宽占本布局的比例
-    private float mSingleImageVerticalWidthHeightPer = 0.84f;//单图的图片宽小于高时,图片宽比高的比例
-    private float mSingleImageHorizontalPer = 0.84f;//单图的图片宽大于高时,图片宽占本布局的比例
-    private float mSingleImageHorizontalWidthHeightPer = 1.75f;//单图的图片宽大于高时,图片宽比高的比例
-    private float mMoreImageSpacePer = 0.012f;//多图时,间隙占本布局宽度的比值
     private int mItemWidth = 0;//条目宽
     private int mItemHeight = 0;//条目高
-    private int mMaxWidth;//去除padding最大宽度
     private float mSpaceWidth;//多图时的图片间隙宽度
     private int mChildRow;//将展示的行数
     private int mChildColumn;//将展示的列数
-    private BaseNineGridImageAdapter mAdapter;//内部view的适配器
-    private NineGridImageAdapter mNineGridImageAdapter;//内部view的适配器
-    private AdapterObserver mDataSetObserver;//观察者
     private int[] mChildAndSpaceSumWidthHeight = new int[2];//所有子空间加间隙的总宽高
-    // 缓存器，存储 item，用于复用
-    private List<SoftReference<TypeImageView>> mCacheViewList;
-    private OnImageItemClickListener mOnImageItemClickListener;
+    private List<TypeImageView> mNormalCacheViewList;
+    private float mSingleImageType = 1;//1矩形,大于1横向长图,小于1纵向长图
+    private OnImageLoadListener mOnImageLoadListener;
+    private List<String> mImageDataList;
+    private TypeImageView mHorizontalSingleTypeImageView;
+    private TypeImageView mVerticalSingleTypeImageView;
+    private TypeImageView mRectangleSingleTypeImageView;
 
     public NineGridImageLayout(Context context) {
         super(context);
@@ -58,44 +52,44 @@ public class NineGridImageLayout extends ViewGroup {
         int measureHeight = MeasureSpec.getSize(heightMeasureSpec);
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        if (mAdapter == null || getChildCount() == 0) {
+        if (mOnImageLoadListener == null || getChildCount() == 0) {
             setMeasuredDimension(widthMode == MeasureSpec.EXACTLY ? measureWidth : getPaddingStart() + getPaddingEnd(),
                     heightMode == MeasureSpec.EXACTLY ?
                             measureHeight :
                             getPaddingTop() + getPaddingBottom());
             return;
         }
-        //以宽为基准
-        mMaxWidth = measureWidth - getPaddingLeft() - getPaddingRight();
-        mSpaceWidth = mMaxWidth * mMoreImageSpacePer;
+        //以宽为基准,去除padding最大宽度
+        int maxWidth = measureWidth - getPaddingLeft() - getPaddingRight();
+        //0.012多图时,间隙占本布局宽度的比值
+        mSpaceWidth = maxWidth * 0.012f;
         int childCount = getChildCount();
         if (childCount == 1) {
             // 如果只有一个 child ，且当前模式为九宫格模式
             View child = getChildAt(0);
             int onlyOneChildWms, onlyOneChildHms;
-            float firstImagePer = mAdapter.getFirstImagePer();
-            if (firstImagePer > 1) {
-                //横向长图
-                int childWidth = (int) (mMaxWidth * mSingleImageHorizontalPer);
+            if (mSingleImageType > 1) {
+                //横向长图,//0.84单图的图片宽大于高时,图片宽占本布局的比例
+                int childWidth = (int) (maxWidth * 0.84f);
                 onlyOneChildWms = MeasureSpec.makeMeasureSpec(childWidth, MeasureSpec.EXACTLY);
                 mItemWidth = childWidth;
-
-                int childHeight = (int) (childWidth / mSingleImageHorizontalWidthHeightPer);
+                //1.75单图的图片宽大于高时,图片宽比高的比例
+                int childHeight = (int) (childWidth / 1.75f);
                 onlyOneChildHms = MeasureSpec.makeMeasureSpec(childHeight, MeasureSpec.EXACTLY);
                 mItemHeight = childHeight;
 
-            } else if (firstImagePer < 1) {
-                //竖向长图
-                int childWidth = (int) (mMaxWidth * mSingleImageVerticalPer);
+            } else if (mSingleImageType < 1) {
+                //竖向长图,//0.6单图的图片宽小于高时,图片宽占本布局的比例
+                int childWidth = (int) (maxWidth * 0.6f);
                 onlyOneChildWms = MeasureSpec.makeMeasureSpec(childWidth, MeasureSpec.EXACTLY);
                 mItemWidth = childWidth;
-
-                int childHeight = (int) (childWidth / mSingleImageVerticalWidthHeightPer);
+                //0.84单图的图片宽小于高时,图片宽比高的比例
+                int childHeight = (int) (childWidth / 0.84f);
                 onlyOneChildHms = MeasureSpec.makeMeasureSpec(childHeight, MeasureSpec.EXACTLY);
                 mItemHeight = childHeight;
             } else {
                 //正方形
-                int childSize = (int) (mMaxWidth * mSingleImageHorizontalPer);
+                int childSize = (int) (maxWidth * 0.84f);
                 onlyOneChildWms = onlyOneChildHms = MeasureSpec.makeMeasureSpec(childSize, MeasureSpec.EXACTLY);
                 mItemWidth = mItemHeight = childSize;
             }
@@ -103,7 +97,7 @@ public class NineGridImageLayout extends ViewGroup {
         } else {
             //超过一张图
             //多图时获取图片尺寸
-            int itemSize = (int) ((mMaxWidth - mSpaceWidth * 2) / 3);
+            int itemSize = (int) ((maxWidth - mSpaceWidth * 2) / 3);
             mItemWidth = mItemHeight = itemSize;
             int measureSpec = MeasureSpec.makeMeasureSpec(itemSize, MeasureSpec.EXACTLY);
             for (int i = 0; i < getChildCount(); i++) {
@@ -121,7 +115,7 @@ public class NineGridImageLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        if (mAdapter == null || getChildCount() == 0) {
+        if (mOnImageLoadListener == null || getChildCount() == 0) {
             return;
         }
         // 遍历 child，设置每个 child 所在的位置
@@ -173,164 +167,145 @@ public class NineGridImageLayout extends ViewGroup {
         }
     }
 
-    public void setDataAndItemListener(List<String> dataList) {
-        removeAllViews();
-        if (dataList == null || dataList.isEmpty()) {
-
-        }else {
-            if (mNineGridImageAdapter==null) {
-                mNineGridImageAdapter = new NineGridImageAdapter(dataList);
-            }else {
-                mNineGridImageAdapter.setNewData(dataList);
-            }
-            if (mCacheViewList==null) {
-                mCacheViewList = new ArrayList<>();
-            }
-
-        }
-    }
-
-    public void setAdapter(BaseNineGridImageAdapter adapter) {
-        if (mAdapter != null && mDataSetObserver != null) {
-            // 删除已经存在的观察者
-            mAdapter.unregisterDataSetObserver(mDataSetObserver);
-        }
-        removeAllViews();
-
-        if (mCacheViewList == null) {
-            mCacheViewList = new ArrayList<>();
+    public void changeChildLayoutAndLoadImageListener(List<String> imageDataList, OnImageLoadListener onImageLoadListener) {
+        mOnImageLoadListener = onImageLoadListener;
+        mImageDataList = imageDataList;
+        if (imageDataList == null || imageDataList.isEmpty()) {
+            //数据空,移除所有的子控件
+            removeAllViews();
+            requestLayout();
+            invalidate();
         } else {
-            mCacheViewList.clear();
+            refreshDataAndLayout();
         }
-        // 重置 adapter
-        mAdapter = adapter;
-        if (mAdapter != null) {
-            mDataSetObserver = new AdapterObserver();
-            // 注册观察者
-            mAdapter.registerDataSetObserver(mDataSetObserver);
-            if (mAdapter.getImageCount() > 0) {
-                addItemViews();
+    }
+
+    private void refreshDataAndLayout() {
+        if (mOnImageLoadListener != null) {
+            int dataSize = mImageDataList.size();
+            if (dataSize > 1) {
+                if (mNormalCacheViewList == null) {
+                    mNormalCacheViewList = new ArrayList<>();
+                }
+                dataSize = dataSize > 9 ? 9 : dataSize;
+                if (dataSize == getChildCount()) {
+                    //数据源的数量和子类控件数量一致
+                    for (int i = 0; i < dataSize; i++) {
+                        TypeImageView childAt = (TypeImageView) getChildAt(i);
+                        String imageType = mOnImageLoadListener.getImageType(i);
+                        childAt.setImageType(imageType);
+                        mOnImageLoadListener.bindData(i, childAt.getImageView(), this);
+                        addItemClickListener(childAt,i);
+                    }
+                } else {
+                    //不一样移除所有子控件
+                    removeAllViews();
+                    for (int i = 0; i < dataSize; i++) {
+                        TypeImageView typeImageView = getNormalItemView(i);
+                        /** 一定要有 LayoutParams ，addView 的时候，item 在 xml 中的 width 和 height 设置的值，都是没效果的（变成 wrap_content ），
+                         * 可能会出现控件的宽高显示偏差，所以必须设置此句）*/
+                        addView(typeImageView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+                        String imageType = mOnImageLoadListener.getImageType(i);
+                        typeImageView.setImageType(imageType);
+                        mOnImageLoadListener.bindData(i, typeImageView.getImageView(), this);
+                        addItemClickListener(typeImageView,i);
+                    }
+                }
+            } else {
+                removeAllViews();
+                //只有一张图片
+                TypeImageView typeImageView;
+                mSingleImageType = mOnImageLoadListener.getFirstImagePer();
+                if (mSingleImageType > 1) {
+                    if (mHorizontalSingleTypeImageView == null) {
+                        typeImageView = new TypeImageView(getContext());
+                        mHorizontalSingleTypeImageView = typeImageView;
+                    } else {
+                        typeImageView = mHorizontalSingleTypeImageView;
+                    }
+                } else if (mSingleImageType < 1) {
+                    if (mVerticalSingleTypeImageView == null) {
+                        typeImageView = new TypeImageView(getContext());
+                        mVerticalSingleTypeImageView = typeImageView;
+                    } else {
+                        typeImageView = mVerticalSingleTypeImageView;
+                    }
+                } else {
+                    if (mRectangleSingleTypeImageView == null) {
+                        typeImageView = new TypeImageView(getContext());
+                        mRectangleSingleTypeImageView = typeImageView;
+                    } else {
+                        typeImageView = mRectangleSingleTypeImageView;
+                    }
+                }
+                addView(typeImageView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+                typeImageView.setImageType(mOnImageLoadListener.getImageType(0));
+                mOnImageLoadListener.bindData(0, typeImageView.getImageView(), this);
+                addItemClickListener(typeImageView,0);
             }
+            Log.d(TAG, "refreshDataAndLayout--->加载图片");
+            requestLayout();
+            invalidate();
         }
     }
 
+    private TypeImageView getNormalItemView(int i) {
+        TypeImageView typeImageView;
+        if (mNormalCacheViewList.size() > i) {
+            typeImageView = mNormalCacheViewList.get(i);
+        } else {
+            typeImageView = new TypeImageView(getContext());
+            mNormalCacheViewList.add(typeImageView);
+        }
+        return typeImageView;
+    }
     /**
-     * 添加 item
+     * 设置 item 的点击监听事件
+     *
+     * @param view
+     * @param position
      */
-    private void addItemViews() {
-        int totalCount = mAdapter.getImageCount();
-        int childCount = totalCount > 9 ? 9 : totalCount;
-        for (int i = 0; i < childCount; i++) {
-            createViewAndAddToParent(i);
-        }
-    }
-
-    private void createViewAndAddToParent(int position) {
-        TypeImageView typeImageView = new TypeImageView(getContext());
-        String imageType = mAdapter.getImageType(position);
-        typeImageView.setImageType(imageType);
-        mAdapter.bindData(position, typeImageView.getImageView(), this);
-        // 将新建的 item 存入列表中
-        mCacheViewList.add(new SoftReference<TypeImageView>(typeImageView));
-        addItemClickListener(typeImageView, position);
-        /** 一定要有 LayoutParams ，addView 的时候，item 在 xml 中的 width 和 height 设置的值，都是没效果的（变成 wrap_content ），
-         * 可能会出现控件的宽高显示偏差，所以必须设置此句）*/
-        addView(typeImageView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-    }
-
     private void addItemClickListener(View view, final int position) {
         view.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOnImageItemClickListener != null) {
-                    mOnImageItemClickListener.onImageItemClick(position, v);
+                if (mOnImageLoadListener != null) {
+                    mOnImageLoadListener.onImageItemClick(position, v);
                 }
             }
         });
     }
-
-    public interface OnImageItemClickListener {
+    public interface OnImageLoadListener {
+        /**
+         * 点击条目监听
+         *
+         * @param position
+         * @param view
+         */
         void onImageItemClick(int position, View view);
-    }
 
-    private class AdapterObserver extends DataSetObserver {
+        /**
+         * 获取第一张图片宽高的比例
+         *
+         * @return
+         */
+        float getFirstImagePer();
 
-        @Override
-        public void onChanged() {
-            super.onChanged();
-            notifyChanged();
-        }
+        /**
+         * 获取图片的类型
+         *
+         * @param position
+         * @return
+         */
+        String getImageType(int position);
 
-        @Override
-        public void onInvalidated() {
-            super.onInvalidated();
-        }
-    }
-
-    /**
-     * 通知刷新
-     */
-    private void notifyChanged() {
-        if (mAdapter != null) {
-            int newSize = mAdapter.getImageCount();
-            if (newSize == 0) {
-                if (mCacheViewList != null) {
-                    mCacheViewList.clear();
-                }
-            } else {
-                if (mCacheViewList == null) {
-                    mCacheViewList = new ArrayList<>();
-                }
-            }
-            removeAllViews();
-            for (int i = 0; i < newSize; i++) {
-                /** 此处做简单的缓存复用处理 */
-                if (mCacheViewList != null && mCacheViewList.size() > 0) {
-                    boolean isAddItem = false;
-                    for (SoftReference<TypeImageView> softReference : mCacheViewList) {
-                        if (softReference != null && softReference.get() != null) {
-                            TypeImageView typeImageView = (TypeImageView) softReference.get();
-                            // 如果列表中的 item 还没有父容器，则复用该 item
-                            if (typeImageView.getParent() == null) {
-                                String imageType = mAdapter.getImageType(i);
-                                typeImageView.setImageType(imageType);
-                                mAdapter.bindData(i, typeImageView.getImageView(), this);
-                                addItemClickListener(typeImageView, i);
-                                /** 一定要有 LayoutParams ，addView 的时候，item 在 xml 中的 width 和 height 设置的值，都是没效果的（变成 wrap_content ），
-                                 * 可能会出现控件的宽高显示偏差，所以必须设置此句）*/
-                                addView(typeImageView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-                                isAddItem = true;
-                                mCacheViewList.remove(softReference);
-                                break;
-                            }
-                        }
-                    }
-                    // 如果从 mCacheViewList 中未找到匹配的 item ，则新建 item
-                    if (!isAddItem) {
-                        createViewAndAddToParent(i);
-                    }
-                } else {
-                    createViewAndAddToParent(i);
-                }
-            }
-        }
-        requestLayout();
-        invalidate();
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        if (mAdapter != null) {
-            if (mDataSetObserver != null) {
-                mAdapter.unregisterDataSetObserver(mDataSetObserver);
-            }
-            mAdapter = null;
-        }
-        if (mCacheViewList != null) {
-            mCacheViewList.clear();
-            mCacheViewList = null;
-        }
-        mOnImageItemClickListener = null;
-        super.onDetachedFromWindow();
+        /**
+         * 绑定数据
+         *
+         * @param position
+         * @param imageView
+         * @param nineGridImageLayout
+         */
+        void bindData(int position, ImageView imageView, NineGridImageLayout nineGridImageLayout);
     }
 }

@@ -21,8 +21,9 @@
 
     <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
     <uses-permission android:name="android.permission.GET_TASKS"/>
-
+    <!--usesCleartextTraffic解决androidP上对http链接的限制-->
     <application
+        android:usesCleartextTraffic="true"
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

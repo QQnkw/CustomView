@@ -3,6 +3,7 @@ package com.nkw.customview.view.NineGridImage;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -53,5 +54,10 @@ public class TypeImageView extends FrameLayout {
         } else {
             mTextView.setVisibility(INVISIBLE);
         }
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return true;
     }
 }

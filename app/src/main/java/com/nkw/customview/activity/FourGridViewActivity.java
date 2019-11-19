@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,6 @@ import com.bumptech.glide.request.transition.Transition;
 import com.nkw.customview.R;
 import com.nkw.customview.comment.AppLocalData;
 import com.nkw.customview.utils.GlideUtils;
-import com.nkw.customview.view.NineGridImage.BaseNineGridImageAdapter;
 import com.nkw.customview.view.NineGridImage.NineGridImageLayout;
 import com.nkw.customview.view.VyTextView;
 import com.nkw.customview.view.fourGridView.ImageViewGroup;
@@ -60,26 +60,27 @@ public class FourGridViewActivity extends BaseActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("NKW","FourGridViewActivity:onSaveInstanceState");
+        outState.putString("NKW", "FourGridViewActivity:onSaveInstanceState");
     }
 
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState!=null) {
+        if (savedInstanceState != null) {
             String string = savedInstanceState.getString("NKW");
-            Toast.makeText(this,"FourGridViewActivity:onRestoreInstanceState--->"+string,Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "FourGridViewActivity:onRestoreInstanceState--->" + string, Toast.LENGTH_LONG).show();
         }
     }
 
 
     private static class FourGridViewAdapter extends RecyclerView.Adapter<FourGridViewHolder> {
 
-        private final Random             mRandom;
-        private final Context            mContext;
+        private final String TAG = FourGridViewAdapter.class.getSimpleName();
+        private final Random mRandom;
+        private final Context mContext;
         private final PopWindowAboutPost mPopWindowAboutPost;
-        private final String[]           mPoems;
+        private final String[] mPoems;
 
         public FourGridViewAdapter(Context context) {
             mRandom = new Random();
@@ -96,7 +97,7 @@ public class FourGridViewActivity extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final FourGridViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull final FourGridViewHolder holder, final int position) {
             int num = mRandom.nextInt(10) + 1;
             String[] strings = Arrays.copyOf(AppLocalData.imgUrlArr, num);
             final ArrayList<String> list = new ArrayList<>();
@@ -112,7 +113,7 @@ public class FourGridViewActivity extends BaseActivity {
                                     float v = resource.getWidth() * 1f / resource.getHeight();
                                     ViewGroup.LayoutParams layoutParams = imageView.getLayoutParams();
                                     layoutParams.width = holder.mCustomGridView.getWidth();
-                                    layoutParams.height = (int) (holder.mCustomGridView.getWidth()/v);
+                                    layoutParams.height = (int) (holder.mCustomGridView.getWidth() / v);
                                     imageView.setLayoutParams(layoutParams);
                                     imageView.setImageBitmap(resource);
                                 }
@@ -136,27 +137,33 @@ public class FourGridViewActivity extends BaseActivity {
             });
             holder.mTvContent.setText(mPoems[position]);
             holder.mTvExpand.setContent(mPoems[position]);
-            holder.mNineGrid.setAdapter(new BaseNineGridImageAdapter() {
-                @Override
-                protected int getImageCount() {
-                    return list.size();
-                }
+            holder.mNineGrid.changeChildLayoutAndLoadImageListener(list,
+                    new NineGridImageLayout.OnImageLoadListener() {
+                        @Override
+                        public void onImageItemClick(int position, View view) {
+                            Toast.makeText(view.getContext(), "onImageItemClick--->clickPosition:" + position,
+                                    Toast.LENGTH_SHORT).show();
+                        }
 
-                @Override
-                protected float getFirstImagePer() {
-                    return 1.5f;
-                }
+                        @Override
+                        public float getFirstImagePer() {
+                            float v = holder.getAdapterPosition() % 2 == 0 ? 1.5f : 0.5f;
+                            Log.d(TAG, "getFirstImagePer--->" + v + "---position:" + holder.getAdapterPosition());
+                            return v;
+                        }
 
-                @Override
-                protected String getImageUrl(int position) {
-                    return list.get(position);
-                }
+                        @Override
+                        public String getImageType(int position) {
+                            return "动图";
+                        }
 
-                @Override
-                protected void bindData(int position, ImageView imageView, NineGridImageLayout nineGridImageLayout) {
-                    GlideUtils.loadImage(mContext, list.get(position), imageView);
-                }
-            });
+                        @Override
+                        public void bindData(int position, final ImageView imageView, NineGridImageLayout nineGridImageLayout) {
+                            String url = list.get(position);
+                            Log.d(TAG, "loadImage--->url:" + url);
+                            GlideUtils.loadImage(mContext, url, imageView);
+                        }
+                    });
         }
 
         @Override
@@ -183,10 +190,10 @@ public class FourGridViewActivity extends BaseActivity {
 
     private static class FourGridViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView       mTvContent;
-        private final VyTextView     mTvExpand;
-        private       ImageViewGroup mCustomGridView;
-        private final Button         mBtn;
+        private final TextView mTvContent;
+        private final VyTextView mTvExpand;
+        private ImageViewGroup mCustomGridView;
+        private final Button mBtn;
         private final NineGridImageLayout mNineGrid;
 
         public FourGridViewHolder(View itemView) {
