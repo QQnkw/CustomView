@@ -1,6 +1,7 @@
 package com.nkw.customview.view.NineGridImage;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -48,11 +49,11 @@ public class TypeImageView extends FrameLayout {
      * @param imageType
      */
     public void setImageType(String imageType) {
-        if ("动图".equals(imageType) || "长图".equals(imageType)) {
+        if (TextUtils.isEmpty(imageType)) {
+            mTextView.setVisibility(INVISIBLE);
+        }else {
             mTextView.setVisibility(VISIBLE);
             mTextView.setText(imageType);
-        } else {
-            mTextView.setVisibility(INVISIBLE);
         }
     }
 
