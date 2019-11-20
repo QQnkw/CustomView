@@ -24,6 +24,7 @@ import com.nkw.customview.R;
 import com.nkw.customview.comment.AppLocalData;
 import com.nkw.customview.utils.GlideUtils;
 import com.nkw.customview.view.NineGridImage.NineGridImageLayout;
+import com.nkw.customview.view.NineGridImage.TypeImageView;
 import com.nkw.customview.view.VyTextView;
 import com.nkw.customview.view.fourGridView.ImageViewGroup;
 import com.nkw.customview.view.popupwindow.PopWindowAboutPost;
@@ -137,7 +138,7 @@ public class FourGridViewActivity extends BaseActivity {
             });
             holder.mTvContent.setText(mPoems[position]);
             holder.mTvExpand.setContent(mPoems[position]);
-            holder.mNineGrid.changeChildLayoutAndLoadImageListener(list,
+            holder.mNineGrid.changeChildLayoutAndLoadImageListener(list.size(),
                     new NineGridImageLayout.OnImageLoadListener() {
                         @Override
                         public void onImageItemClick(int position, View view) {
@@ -146,22 +147,17 @@ public class FourGridViewActivity extends BaseActivity {
                         }
 
                         @Override
-                        public float getFirstImagePer() {
+                        public float getSingleImageWidthHeightPer() {
                             float v = holder.getAdapterPosition() % 2 == 0 ? 1.5f : 0.5f;
                             Log.d(TAG, "getFirstImagePer--->" + v + "---position:" + holder.getAdapterPosition());
                             return v;
                         }
 
                         @Override
-                        public String getImageType(int position) {
-                            return "动图";
-                        }
-
-                        @Override
-                        public void bindData(int position, final ImageView imageView, NineGridImageLayout nineGridImageLayout) {
+                        public void bindData(int position, TypeImageView typeImageView, NineGridImageLayout nineGridImageLayout) {
                             String url = list.get(position);
                             Log.d(TAG, "loadImage--->url:" + url);
-                            GlideUtils.loadImage(mContext, url, imageView);
+                            GlideUtils.loadImage(mContext, url, typeImageView.getImageView());
                         }
                     });
         }

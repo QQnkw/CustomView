@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +20,10 @@ public class NineGridImageLayout extends ViewGroup {
     private List<TypeImageView> mNormalCacheViewList;
     private float mSingleImageType = 1;//1矩形,大于1横向长图,小于1纵向长图
     private OnImageLoadListener mOnImageLoadListener;
-    private List<String> mImageDataList;
     private TypeImageView mHorizontalSingleTypeImageView;
     private TypeImageView mVerticalSingleTypeImageView;
     private TypeImageView mRectangleSingleTypeImageView;
+    private int mImageDataSize = 0;//数据源的大小
 
     public NineGridImageLayout(Context context) {
         super(context);
@@ -167,10 +166,10 @@ public class NineGridImageLayout extends ViewGroup {
         }
     }
 
-    public void changeChildLayoutAndLoadImageListener(List<String> imageDataList, OnImageLoadListener onImageLoadListener) {
+    public void changeChildLayoutAndLoadImageListener(int imageDataSize, OnImageLoadListener onImageLoadListener) {
         mOnImageLoadListener = onImageLoadListener;
-        mImageDataList = imageDataList;
-        if (imageDataList == null || imageDataList.isEmpty()) {
+        mImageDataSize = imageDataSize;
+        if (imageDataSize == 0) {
             //数据空,移除所有的子控件
             removeAllViews();
             requestLayout();
@@ -182,32 +181,27 @@ public class NineGridImageLayout extends ViewGroup {
 
     private void refreshDataAndLayout() {
         if (mOnImageLoadListener != null) {
-            int dataSize = mImageDataList.size();
-            if (dataSize > 1) {
+            if (mImageDataSize > 1) {
                 if (mNormalCacheViewList == null) {
                     mNormalCacheViewList = new ArrayList<>();
                 }
-                dataSize = dataSize > 9 ? 9 : dataSize;
-                if (dataSize == getChildCount()) {
+                mImageDataSize = mImageDataSize > 9 ? 9 : mImageDataSize;
+                if (mImageDataSize == getChildCount()) {
                     //数据源的数量和子类控件数量一致
-                    for (int i = 0; i < dataSize; i++) {
+                    for (int i = 0; i < mImageDataSize; i++) {
                         TypeImageView childAt = (TypeImageView) getChildAt(i);
-                        String imageType = mOnImageLoadListener.getImageType(i);
-                        childAt.setImageType(imageType);
-                        mOnImageLoadListener.bindData(i, childAt.getImageView(), this);
+                        mOnImageLoadListener.bindData(i, childAt, this);
                         addItemClickListener(childAt,i);
                     }
                 } else {
                     //不一样移除所有子控件
                     removeAllViews();
-                    for (int i = 0; i < dataSize; i++) {
+                    for (int i = 0; i < mImageDataSize; i++) {
                         TypeImageView typeImageView = getNormalItemView(i);
                         /** 一定要有 LayoutParams ，addView 的时候，item 在 xml 中的 width 和 height 设置的值，都是没效果的（变成 wrap_content ），
                          * 可能会出现控件的宽高显示偏差，所以必须设置此句）*/
                         addView(typeImageView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-                        String imageType = mOnImageLoadListener.getImageType(i);
-                        typeImageView.setImageType(imageType);
-                        mOnImageLoadListener.bindData(i, typeImageView.getImageView(), this);
+                        mOnImageLoadListener.bindData(i, typeImageView, this);
                         addItemClickListener(typeImageView,i);
                     }
                 }
@@ -215,7 +209,7 @@ public class NineGridImageLayout extends ViewGroup {
                 removeAllViews();
                 //只有一张图片
                 TypeImageView typeImageView;
-                mSingleImageType = mOnImageLoadListener.getFirstImagePer();
+                mSingleImageType = mOnImageLoadListener.getSingleImageWidthHeightPer();
                 if (mSingleImageType > 1) {
                     if (mHorizontalSingleTypeImageView == null) {
                         typeImageView = new TypeImageView(getContext());
@@ -239,11 +233,9 @@ public class NineGridImageLayout extends ViewGroup {
                     }
                 }
                 addView(typeImageView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-                typeImageView.setImageType(mOnImageLoadListener.getImageType(0));
-                mOnImageLoadListener.bindData(0, typeImageView.getImageView(), this);
+                mOnImageLoadListener.bindData(0, typeImageView, this);
                 addItemClickListener(typeImageView,0);
             }
-            Log.d(TAG, "refreshDataAndLayout--->加载图片");
             requestLayout();
             invalidate();
         }
@@ -285,27 +277,19 @@ public class NineGridImageLayout extends ViewGroup {
         void onImageItemClick(int position, View view);
 
         /**
-         * 获取第一张图片宽高的比例
+         * 获取显示单张图片宽高的比例
          *
          * @return
          */
-        float getFirstImagePer();
-
-        /**
-         * 获取图片的类型
-         *
-         * @param position
-         * @return
-         */
-        String getImageType(int position);
+        float getSingleImageWidthHeightPer();
 
         /**
          * 绑定数据
          *
          * @param position
-         * @param imageView
+         * @param typeImageView
          * @param nineGridImageLayout
          */
-        void bindData(int position, ImageView imageView, NineGridImageLayout nineGridImageLayout);
+        void bindData(int position, TypeImageView typeImageView, NineGridImageLayout nineGridImageLayout);
     }
 }

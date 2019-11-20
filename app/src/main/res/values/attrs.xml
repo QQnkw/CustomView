@@ -51,4 +51,8 @@
         <attr name="shimmer_gradient_center_color_width" format="float|reference"/>
         <attr name="shimmer_reverse_animation" format="boolean|reference"/>
     </declare-styleable>
+    <declare-styleable name="VyMovingImageView">
+        <attr name="move_speed" format="integer"/>
+        <attr name="auto_move" format="boolean"/>
+    </declare-styleable>
 </resources>

@@ -12,6 +12,15 @@
         android:orientation="vertical"
         tools:context=".activity.MainActivity">
 
+        <com.nkw.customview.view.movingimage.VyMovingImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/horizontal_long"/>
+        <com.nkw.customview.view.movingimage.VyMovingImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/vertical_long"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -191,12 +200,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="自定义layoutManager"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="夜间模式"
             android:textStyle="bold"/>
+
         <Button
             android:id="@+id/btn_night"
             android:layout_width="match_parent"
