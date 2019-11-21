@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SmallWidgetActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.nkw.customview.view.movingimage.VyMovingImageView
+            android:id="@+id/moving_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"/>
+
+        <com.nkw.customview.view.TabLayoutVY
+            android:id="@+id/tablayoutVy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TabOne"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TabOne"/>
+
+            <TextView
+                android:id="@+id/TabTwo"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TabTwo"/>
+
+            <TextView
+                android:id="@+id/TabThree"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TabThree"/>
+
+            <TextView
+                android:id="@+id/TabFour"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TabFour"/>
+        </com.nkw.customview.view.TabLayoutVY>
+
+        <com.nkw.customview.view.RefreshLikeIOSView
+            android:id="@+id/RefreshLikeIOSView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_20"/>
+
+        <com.nkw.customview.view.VyLoading
+            android:id="@+id/vy_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_20"/>
+
+        <com.nkw.customview.view.VyRadar
+            android:id="@+id/vy_radar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.nkw.customview.view.ScanView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="bottom"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="页面加载过度动画"
+                android:textColor="@color/app_white_fff"
+                android:textSize="30sp"/>
+
+            <com.nkw.customview.view.ShimmerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:shimmer_auto_start="true"
+                app:shimmer_color="@color/app_white_fff"
+                />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="自定义Drawable"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/iv_custom_drawable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="50dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

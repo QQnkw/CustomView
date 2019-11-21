@@ -10,27 +10,24 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
-    <!-- 增加文件存储和访问摄像头的权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> <!-- 增加文件存储和访问摄像头的权限 -->
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
 
     <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
-
-    <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
+    <uses-feature android:name="android.hardware.camera.autofocus"/> <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
     <uses-permission android:name="android.permission.GET_TASKS"/>
-    <!--usesCleartextTraffic解决androidP上对http链接的限制-->
+
     <application
-        android:usesCleartextTraffic="true"
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.nkw.customview.fileprovider"
@@ -48,8 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.FourGridViewActivity">
-        </activity>
+        <activity android:name=".activity.FourGridViewActivity"/>
         <activity
             android:name=".activity.WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -67,23 +63,17 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.DragActivity">
-        </activity>
-        <activity android:name=".activity.BarrageGroupViewActivity">
-        </activity>
-        <activity android:name=".activity.BadarActivity">
-        </activity>
-        <activity android:name=".activity.VyWoQuActivity"/>
-        <activity android:name=".activity.CustomLayoutManagerActivity">
-        </activity>
-        <activity android:name=".activity.CameraActivity">
-        </activity>
-        <activity android:name=".activity.CustomCameraActivity"/>
-        <activity android:name=".activity.Camera1Activity"
+        <activity android:name=".activity.DragActivity"/>
+        <activity android:name=".activity.BarrageGroupViewActivity"/>
+        <activity android:name=".activity.CustomLayoutManagerActivity"/>
+        <activity android:name=".activity.camera.CameraActivity"/>
+        <activity android:name=".activity.camera.CustomCameraActivity"/>
+        <activity
+            android:name=".activity.camera.Camera1Activity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activity.Camera2Activity">
-        </activity>
+        <activity android:name=".activity.camera.Camera2Activity"/>
+        <activity android:name=".activity.SmallWidgetActivity"/>
     </application>
 
 </manifest>

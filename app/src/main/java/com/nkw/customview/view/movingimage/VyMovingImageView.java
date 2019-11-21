@@ -1,5 +1,6 @@
 package com.nkw.customview.view.movingimage;
 
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,7 +9,7 @@ import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.nkw.customview.R;
 
@@ -26,26 +27,7 @@ public class VyMovingImageView extends android.support.v7.widget.AppCompatImageV
     private final int HORIZONTAL_MOVE = 2;
     private final int NONE_MOVE = 0;
     private int mMoveType = NONE_MOVE;//移动类型
-    private ValueAnimator mValueAnimator;
-    private ValueAnimator.AnimatorUpdateListener mUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
-        @Override
-        public void onAnimationUpdate(ValueAnimator animation) {
-            int animatedValue = (int) animation.getAnimatedValue();
-            Log.d(TAG, "onAnimationUpdate--->animatedValue:" + animatedValue);
-            switch (mMoveType) {
-                case VERTICAL_MOVE:
-                    scrollTo(0, animatedValue);
-                    invalidate();
-                    break;
-                case HORIZONTAL_MOVE:
-                    scrollTo(animatedValue, 0);
-                    invalidate();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+    private ObjectAnimator mObjectAnimator;
 
     public VyMovingImageView(Context context) {
         this(context, null);
@@ -103,59 +85,38 @@ public class VyMovingImageView extends android.support.v7.widget.AppCompatImageV
 
         float widthOffset = (mImageWidth * scaleValue) - mDisplayWidth;
         float heightOffset = (mImageHeight * scaleValue) - mDisplayHeight;
-        /*String scrollOrientation;
-        int start, end;
-        long time;
+        String scrollOrientation;
+        int offset;
+        long animatorTime;
         switch (mMoveType) {
             case VERTICAL_MOVE:
-                long singleMoveVerticalSecond = (long) ((heightOffset / mMoveSpeed) * 1000);
-                time = singleMoveVerticalSecond;
+                animatorTime = (long) ((heightOffset / mMoveSpeed) * 1000);
                 scrollOrientation = "scrollY";
-                end = (int) heightOffset;
+                offset = (int) heightOffset;
                 break;
             case HORIZONTAL_MOVE:
-                long singleMoveHorizontalSecond = (long) ((widthOffset / mMoveSpeed) * 1000);
-                time = singleMoveHorizontalSecond;
+                animatorTime = (long) ((widthOffset / mMoveSpeed) * 1000);
                 scrollOrientation = "scrollX";
-                end = (int) widthOffset;
+                offset = (int) widthOffset;
                 break;
             default:
                 return;
         }
-        ObjectAnimator objectAnimator = ObjectAnimator
-                .ofInt(this, scrollOrientation, 0, end+1)
-                .setDuration(time);
-        objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        objectAnimator.setRepeatMode(ValueAnimator.REVERSE);
-        objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        if (mAutoMove) {
-            objectAnimator.start();
-        }*/
-        if (mValueAnimator == null) {
-            mValueAnimator = new ValueAnimator();
+        if (mObjectAnimator == null) {
+            mObjectAnimator = ObjectAnimator
+                    .ofInt(this, scrollOrientation, 0, offset + 1)
+                    .setDuration(animatorTime);
+            mObjectAnimator.setRepeatCount(ValueAnimator.INFINITE);
+            mObjectAnimator.setRepeatMode(ValueAnimator.REVERSE);
+            mObjectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         } else {
-            mValueAnimator.removeAllListeners();
-            mValueAnimator.cancel();
+            mObjectAnimator.setTarget(this);
+            mObjectAnimator.setPropertyName(scrollOrientation);
+            mObjectAnimator.setIntValues(0, (offset + 1));
+            mObjectAnimator.setDuration(animatorTime);
         }
-        switch (mMoveType) {
-            case VERTICAL_MOVE:
-                mValueAnimator.setIntValues(0, (int) heightOffset);
-                long singleMoveVerticalSecond = (long) ((heightOffset / mMoveSpeed) * 1000);
-                mValueAnimator.setDuration(singleMoveVerticalSecond);
-                break;
-            case HORIZONTAL_MOVE:
-                mValueAnimator.setIntValues(0, (int) widthOffset);
-                long singleMoveHorizontalSecond = (long) ((widthOffset / mMoveSpeed) * 1000);
-                mValueAnimator.setDuration(singleMoveHorizontalSecond);
-                break;
-            default:
-                return;
-        }
-        mValueAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        mValueAnimator.setRepeatMode(ValueAnimator.REVERSE);
-        mValueAnimator.addUpdateListener(mUpdateListener);
         if (mAutoMove) {
-            mValueAnimator.start();
+            mObjectAnimator.start();
         }
     }
 
@@ -235,5 +196,39 @@ public class VyMovingImageView extends android.support.v7.widget.AppCompatImageV
     public void setImageBitmap(Bitmap bm) {
         super.setImageBitmap(bm);
         updateAll();
+    }
+
+    public void startImageAnimator() {
+        if (mObjectAnimator != null) {
+            mObjectAnimator.start();
+        }
+    }
+
+    public void cancelImageAnimator() {
+        if (mObjectAnimator != null) {
+            mObjectAnimator.cancel();
+        }
+    }
+
+    public void pauseImageAnimator() {
+        if (mObjectAnimator != null) {
+            if (mObjectAnimator.isRunning()) {
+                mObjectAnimator.pause();
+            }
+        }
+    }
+
+    public void resumeImageAnimator() {
+        if (mObjectAnimator != null) {
+            if (mObjectAnimator.isPaused()) {
+                mObjectAnimator.resume();
+            }
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        cancelImageAnimator();
     }
 }

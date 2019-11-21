@@ -1,4 +1,4 @@
-package com.nkw.customview.activity;
+package com.nkw.customview.activity.camera;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

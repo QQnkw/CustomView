@@ -1,4 +1,4 @@
-package com.nkw.customview.activity;
+package com.nkw.customview.activity.camera;
 
 import android.content.Intent;
 import android.os.Bundle;

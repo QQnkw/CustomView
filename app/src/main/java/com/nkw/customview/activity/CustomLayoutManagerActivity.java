@@ -1,5 +1,6 @@
 package com.nkw.customview.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,10 @@ import java.util.Random;
 public class CustomLayoutManagerActivity extends AppCompatActivity {
 
     private Random mRandom;
+
+    public static void startActivity(BaseActivity activity) {
+        activity.startActivity(new Intent(activity,CustomLayoutManagerActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

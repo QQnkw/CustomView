@@ -1,4 +1,4 @@
-package com.nkw.customview.activity;
+package com.nkw.customview.activity.camera;
 
 import android.Manifest;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.nkw.customview.R;
+import com.nkw.customview.activity.BaseActivity;
 import com.nkw.customview.utils.PhotoBitmapUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -31,6 +32,10 @@ public class CameraActivity extends AppCompatActivity {
     private File          mFile;
     private FileInputStream mFis;
     private CameraActivity mActivity;
+
+    public static void startActivity(BaseActivity activity) {
+        activity.startActivity(new Intent(activity,CameraActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +64,7 @@ public class CameraActivity extends AppCompatActivity {
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mActivity,CustomCameraActivity.class));
+                startActivity(new Intent(mActivity, CustomCameraActivity.class));
             }
         });
     }

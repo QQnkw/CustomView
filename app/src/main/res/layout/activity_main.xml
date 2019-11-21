@@ -12,97 +12,18 @@
         android:orientation="vertical"
         tools:context=".activity.MainActivity">
 
-        <com.nkw.customview.view.movingimage.VyMovingImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@mipmap/horizontal_long"/>
-        <com.nkw.customview.view.movingimage.VyMovingImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@mipmap/vertical_long"/>
-
-        <TextView
+        <Button
+            android:id="@+id/btn_small_widget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TabLayoutVY"
-            android:textStyle="bold"/>
-
-        <com.nkw.customview.view.TabLayoutVY
-            android:id="@+id/tablayoutVy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/TabOne"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="TabOne"/>
-
-            <TextView
-                android:id="@+id/TabTwo"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="TabTwo"/>
-
-            <TextView
-                android:id="@+id/TabThree"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="TabThree"/>
-
-            <TextView
-                android:id="@+id/TabFour"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="TabFour"/>
-        </com.nkw.customview.view.TabLayoutVY>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="RefreshLikeIOSView"
-            android:textStyle="bold"/>
-
-        <com.nkw.customview.view.RefreshLikeIOSView
-            android:id="@+id/RefreshLikeIOSView"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Custom GridView And FitPopWindow"
-            android:textStyle="bold"/>
+            android:text="小控件集合"
+            />
 
         <Button
             android:id="@+id/btn_four_grid_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Custom GridView And FitPopWindow"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="VYloading"
-            android:textStyle="bold"/>
-
-        <com.nkw.customview.view.VyLoading
-            android:id="@+id/vy_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:text="收缩展开的文本控件,多图布局,自适应的PopWindow"/>
 
         <Button
             android:id="@+id/btn_webView"
@@ -110,90 +31,17 @@
             android:layout_height="wrap_content"
             android:text="webView"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="DragLayout"
-            android:textStyle="bold"/>
-
         <Button
             android:id="@+id/btn_dragLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DragLayout"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="弹幕"
-            android:textStyle="bold"/>
+            android:text="拖动布局"/>
 
         <Button
             android:id="@+id/btn_barrage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="barrage"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="水波紋"
-            android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/btn_radar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="水波紋"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="电路图"
-            android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/btn_dian_lu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="电路图"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="自定义Drawable"
-                android:textStyle="bold"/>
-
-            <ImageView
-                android:id="@+id/iv_custom_drawable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="50dp"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
-            android:background="@color/app_red_FF0000"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="自定义layoutManager"
-            android:textStyle="bold"/>
+            android:text="弹幕"/>
 
         <Button
             android:id="@+id/btn_layoutManager"
@@ -201,25 +49,11 @@
             android:layout_height="wrap_content"
             android:text="自定义layoutManager"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="夜间模式"
-            android:textStyle="bold"/>
-
         <Button
             android:id="@+id/btn_night"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="夜间模式"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="自定义相机"
-            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/btn_custom_camera"
