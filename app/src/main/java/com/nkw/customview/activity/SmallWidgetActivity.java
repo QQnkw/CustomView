@@ -81,5 +81,6 @@ public class SmallWidgetActivity extends AppCompatActivity {
     private void movingImage() {
         VyMovingImageView movingImageView = findViewById(R.id.moving_image_view);
         Glide.with(this).load(AppLocalData.imgUrlArr[7]).into(movingImageView);
+//        Glide.with(this).load(R.mipmap.vertical_long).into(movingImageView);
     }
 }

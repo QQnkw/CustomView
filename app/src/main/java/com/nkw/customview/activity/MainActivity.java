@@ -8,6 +8,7 @@ import com.nkw.customview.activity.camera.CameraActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -24,6 +25,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_barrage).setOnClickListener(this);
         findViewById(R.id.btn_layoutManager).setOnClickListener(this);
         findViewById(R.id.btn_night).setOnClickListener(this);
+        findViewById(R.id.btn_custom_camera).setOnClickListener(this);
         findViewById(R.id.btn_custom_camera).setOnClickListener(this);
     }
 

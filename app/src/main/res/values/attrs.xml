@@ -55,4 +55,7 @@
         <attr name="move_speed" format="integer"/>
         <attr name="auto_move" format="boolean"/>
     </declare-styleable>
+    <declare-styleable name="AngleImageView">
+        <attr name="angle" format="integer"/>
+    </declare-styleable>
 </resources>

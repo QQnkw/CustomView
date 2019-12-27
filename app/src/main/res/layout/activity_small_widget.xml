@@ -12,6 +12,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <com.nkw.customview.view.AngleImageView
+            android:id="@+id/iv_angle"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/pic"/>
+
         <com.nkw.customview.view.movingimage.VyMovingImageView
             android:id="@+id/moving_image_view"
             android:layout_width="match_parent"
