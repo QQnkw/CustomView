@@ -37,4 +37,7 @@
         <item>29.画屏天畔，梦回依约，十洲云水。手捻红笺寄人书，写无限、伤春事。别浦高楼曾漫倚，对江南千里。楼下分流水声中，有当日、凭高泪。</item>
         <item>30.态浓意远。眉颦笑浅。薄罗衣窄絮风软。鬓云欺翠卷。南园花树春光暖。红香径里榆钱满。欲上秋千又惊懒。且归休怕晚。</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

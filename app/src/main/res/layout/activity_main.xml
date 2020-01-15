@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,49 +15,53 @@
             android:id="@+id/btn_small_widget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="小控件集合"
-            />
+            android:text="小控件集合" />
 
         <Button
             android:id="@+id/btn_four_grid_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="收缩展开的文本控件,多图布局,自适应的PopWindow"/>
+            android:text="收缩展开的文本控件,多图布局,自适应的PopWindow" />
 
         <Button
             android:id="@+id/btn_webView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="webView"/>
+            android:text="webView的嵌套滚动" />
 
         <Button
             android:id="@+id/btn_dragLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="拖动布局"/>
+            android:text="拖动布局" />
 
         <Button
             android:id="@+id/btn_barrage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="弹幕"/>
+            android:text="弹幕" />
 
         <Button
             android:id="@+id/btn_layoutManager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="自定义layoutManager"/>
+            android:text="自定义layoutManager" />
 
         <Button
             android:id="@+id/btn_night"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="夜间模式"/>
+            android:text="夜间模式" />
 
         <Button
             android:id="@+id/btn_custom_camera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="自定义相机"/>
+            android:text="自定义相机" />
+
+        <FrameLayout
+            android:id="@+id/fl"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"></FrameLayout>
     </LinearLayout>
 </ScrollView>
