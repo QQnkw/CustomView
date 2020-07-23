@@ -1,5 +1,6 @@
 package com.nkw.customview.view;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -8,6 +9,7 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 
 import com.nkw.customview.R;
 
@@ -133,5 +135,27 @@ public class VoiceUiView extends View {
         mLineHeightList.add(0, value);
         mLineHeightList.removeLast();
         invalidate();
+    }
+
+    /**
+     * 回到初始状态
+     */
+    public void resetLineHeight() {
+        ValueAnimator valueAnimator =
+                ValueAnimator.ofFloat(1, 0).setDuration(1000);
+        valueAnimator.setInterpolator(new AccelerateInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float animatedValue = (float) animation.getAnimatedValue();
+                for (int i = 0; i < mLineHeightList.size(); i++) {
+                    Float oldValue = mLineHeightList.get(i);
+                    float nowValue = oldValue * animatedValue;
+                    mLineHeightList.set(i, nowValue);
+                }
+                invalidate();
+            }
+        });
+        valueAnimator.start();
     }
 }

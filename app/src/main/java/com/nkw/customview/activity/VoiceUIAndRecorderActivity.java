@@ -53,11 +53,12 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
 
             @Override
             public void onStop() {
-
+                voiceUI.resetLineHeight();
             }
 
             @Override
             public void onCancel() {
+                voiceUI.resetLineHeight();
             }
 
             @Override
