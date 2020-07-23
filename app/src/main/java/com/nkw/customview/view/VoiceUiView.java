@@ -121,14 +121,14 @@ public class VoiceUiView extends View {
         }
     }
 
-    public void setLineData(float value) {
-        if (value > mMaxVolume) {
-            value = mMeasureHeight / 2.0F - mColumnWidth / 2.0F;
-        } else if (value > 0) {
-            float v = value / mMaxVolume;
-            value = mMeasureHeight / 2.0F * v;
-        } else {
-            value = 0;
+    public void setLineData(float percentage) {
+        float maxHeight = mMeasureHeight / 2.0F - mColumnWidth / 2.0F;
+        float value = maxHeight * percentage;
+        if (mColumnWidth / 2.0F > value) {
+            value = 0F;
+        }
+        if (value > maxHeight) {
+            value = maxHeight;
         }
         mLineHeightList.add(0, value);
         mLineHeightList.removeLast();
