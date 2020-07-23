@@ -53,6 +53,7 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
 
             @Override
             public void onStop() {
+
             }
 
             @Override
@@ -67,6 +68,11 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
             @Override
             public void recordTime(long countTime) {
                 Toast.makeText(VoiceUIAndRecorderActivity.this, "耗时" + countTime, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onVoiceTimeTooShort() {
+                Toast.makeText(VoiceUIAndRecorderActivity.this, "录音时间太短", Toast.LENGTH_SHORT).show();
             }
         });
 

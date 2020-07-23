@@ -25,6 +25,7 @@ public class VoiceRecorderManager {
     private long mStartTime = 0L;
     private MediaRecorder mMediaRecorder;
     private RecorderSateListener mRecorderSateListener;
+    private int mCountTime = 0;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -37,8 +38,9 @@ public class VoiceRecorderManager {
                     mRecorderSateListener.decibelPercentageListener(value);
                     break;
                 case CODE_TIME:
-                    long time = (long) msg.obj;
-                    mRecorderSateListener.recordTime(time);
+                    mCountTime++;
+                    mRecorderSateListener.recordTime(mCountTime);
+                    sendEmptyMessageDelayed(CODE_TIME, 1000);
                     break;
             }
         }
@@ -95,10 +97,12 @@ public class VoiceRecorderManager {
             if (mRecorderSateListener != null) {
                 mRecorderSateListener.onStart();
             }
+            //录音时长
+            mCountTime = 0;
+            mHandler.sendEmptyMessageDelayed(CODE_TIME,1000);
+            //线程控制器
             isRecording = true;
             new Thread(new Runnable() {
-                private int count = 0;
-
                 @Override
                 public void run() {
                     try {
@@ -109,14 +113,6 @@ public class VoiceRecorderManager {
                             dbMessage.what = CODE_DECIBEL;
                             dbMessage.obj = percentage;
                             mHandler.sendMessage(dbMessage);
-                            count++;
-                            if (count == 10) {
-                                Message timeMessage = new Message();
-                                timeMessage.what = CODE_TIME;
-                                timeMessage.obj = (System.currentTimeMillis() - mStartTime) / 1000;
-                                mHandler.sendMessage(timeMessage);
-                                count = 0;
-                            }
                             SystemClock.sleep(100);
                         }
                     } catch (Exception e) {
@@ -150,6 +146,7 @@ public class VoiceRecorderManager {
             Log.d(TAG, e.toString());
         }
         isRecording = false;
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     /**
@@ -162,17 +159,24 @@ public class VoiceRecorderManager {
                 mMediaRecorder.release();
                 mMediaRecorder = null;
                 File file = new File(mVoiceFilePath);
-                if (file.length() == 0) {
+                if (file.exists() && file.length() == 0) {
                     file.delete();
                 }
                 if (mRecorderSateListener != null) {
                     mRecorderSateListener.onStop();
+                    if (mCountTime < 3) {
+                        if (file.exists()) {
+                            file.delete();
+                        }
+                        mRecorderSateListener.onVoiceTimeTooShort();
+                    }
                 }
             }
         } catch (IllegalStateException e) {
             Log.d(TAG, e.toString());
         }
         isRecording = false;
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     /**
@@ -201,5 +205,7 @@ public class VoiceRecorderManager {
         void decibelPercentageListener(float value);
 
         void recordTime(long countTime);
+
+        void onVoiceTimeTooShort();
     }
 }
