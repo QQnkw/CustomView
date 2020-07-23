@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.nkw.customview">
+    package="com.nkw.customview">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_SETTINGS"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> <!-- 增加文件存储和访问摄像头的权限 -->
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 增加文件存储和访问摄像头的权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/> <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
-    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:name=".App"
@@ -27,6 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.VoiceUIAndRecorderActivity"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -35,22 +36,21 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity android:name=".activity.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.FourGridViewActivity"/>
+        <activity android:name=".activity.FourGridViewActivity" />
         <activity
             android:name=".activity.WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:hardwareAccelerated="true">
-        </activity>
+            android:hardwareAccelerated="true"></activity>
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"
             android:alwaysRetainTaskState="true"
@@ -58,22 +58,21 @@
             android:exported="false"
             android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="com.tencent.smtt.tbs.video.PLAY"/>
+                <action android:name="com.tencent.smtt.tbs.video.PLAY" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.DragActivity"/>
-        <activity android:name=".activity.BarrageGroupViewActivity"/>
-        <activity android:name=".activity.CustomLayoutManagerActivity"/>
-        <activity android:name=".activity.camera.CameraActivity"/>
-        <activity android:name=".activity.camera.CustomCameraActivity"/>
+        <activity android:name=".activity.DragActivity" />
+        <activity android:name=".activity.BarrageGroupViewActivity" />
+        <activity android:name=".activity.CustomLayoutManagerActivity" />
+        <activity android:name=".activity.camera.CameraActivity" />
+        <activity android:name=".activity.camera.CustomCameraActivity" />
         <activity
             android:name=".activity.camera.Camera1Activity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".activity.camera.Camera2Activity"/>
-        <activity android:name=".activity.SmallWidgetActivity"/>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.camera.Camera2Activity" />
+        <activity android:name=".activity.SmallWidgetActivity" />
     </application>
 
 </manifest>

@@ -48,6 +48,12 @@
             android:text="自定义layoutManager" />
 
         <Button
+            android:id="@+id/btn_voice_ui"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="声音的录入和播放UI功能" />
+
+        <Button
             android:id="@+id/btn_night"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

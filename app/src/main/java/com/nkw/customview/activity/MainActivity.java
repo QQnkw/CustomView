@@ -27,6 +27,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.btn_night).setOnClickListener(this);
         findViewById(R.id.btn_custom_camera).setOnClickListener(this);
         findViewById(R.id.btn_custom_camera).setOnClickListener(this);
+        findViewById(R.id.btn_voice_ui).setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +57,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_custom_camera:
                 CameraActivity.startActivity(mActivity);
+                break;
+            case R.id.btn_voice_ui:
+                VoiceUIAndRecorderActivity.startActivity(mActivity);
                 break;
         }
     }

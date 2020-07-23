@@ -17,7 +17,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initViewSet();
     }
 
-    protected void initViewSet(){};
+    protected void initViewSet(){}
 
     public abstract int getLayoutId();
 }

@@ -1,61 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="TabLayoutVY">
-        <attr name="underLineColor" format="color"/>
-        <attr name="underLineHeight" format="dimension"/>
+        <attr name="underLineColor" format="color" />
+        <attr name="underLineHeight" format="dimension" />
     </declare-styleable>
     <!--可展开或搜索的文本,对于表情大小进行了处理-->
     <declare-styleable name="VyTextView">
-        <attr name="maxShowLines" format="integer"/>
-        <attr name="suffixText" format="string"/>
-        <attr name="suffixColor" format="color"/>
-        <attr name="clickSpanEnable" format="boolean"/>
+        <attr name="maxShowLines" format="integer" />
+        <attr name="suffixText" format="string" />
+        <attr name="suffixColor" format="color" />
+        <attr name="clickSpanEnable" format="boolean" />
         <attr name="clickSpanTo" format="enum">
-            <enum name="expand" value="0"/>
-            <enum name="jump" value="1"/>
+            <enum name="expand" value="0" />
+            <enum name="jump" value="1" />
         </attr>
     </declare-styleable>
     <!--来自网络-->
     <declare-styleable name="ExpandableLayout">
-        <attr name="el_duration" format="integer"/>
-        <attr name="el_expanded" format="boolean"/>
-        <attr name="layout_expandable" format="boolean"/>
+        <attr name="el_duration" format="integer" />
+        <attr name="el_expanded" format="boolean" />
+        <attr name="layout_expandable" format="boolean" />
     </declare-styleable>
     <!--来自网络-->
     <declare-styleable name="PagerSlidingTabStrip">
-        <attr name="pstsIndicatorColor" format="color"/>
-        <attr name="pstsUnderlineColor" format="color"/>
-        <attr name="pstsDividerColor" format="color"/>
-        <attr name="pstsIndicatorHeight" format="dimension"/>
-        <attr name="pstsUnderlineHeight" format="dimension"/>
-        <attr name="pstsDividerPadding" format="dimension"/>
-        <attr name="pstsTabPaddingLeftRight" format="dimension"/>
-        <attr name="pstsScrollOffset" format="dimension"/>
-        <attr name="pstsTabBackground" format="reference"/>
-        <attr name="pstsShouldExpand" format="boolean"/>
-        <attr name="pstsTextAllCaps" format="boolean"/>
+        <attr name="pstsIndicatorColor" format="color" />
+        <attr name="pstsUnderlineColor" format="color" />
+        <attr name="pstsDividerColor" format="color" />
+        <attr name="pstsIndicatorHeight" format="dimension" />
+        <attr name="pstsUnderlineHeight" format="dimension" />
+        <attr name="pstsDividerPadding" format="dimension" />
+        <attr name="pstsTabPaddingLeftRight" format="dimension" />
+        <attr name="pstsScrollOffset" format="dimension" />
+        <attr name="pstsTabBackground" format="reference" />
+        <attr name="pstsShouldExpand" format="boolean" />
+        <attr name="pstsTextAllCaps" format="boolean" />
     </declare-styleable>
     <declare-styleable name="VyLoading">
-        <attr name="arcWidth" format="dimension"/>
-        <attr name="arcColor" format="color"/>
+        <attr name="arcWidth" format="dimension" />
+        <attr name="arcColor" format="color" />
     </declare-styleable>
     <declare-styleable name="BarrageGroupView">
-        <attr name="rowNum" format="integer"/>
+        <attr name="rowNum" format="integer" />
     </declare-styleable>
     <declare-styleable name="ShimmerView">
-        <attr name="shimmer_color" format="color|reference"/>
-        <attr name="shimmer_animation_duration" format="integer|reference"/>
-        <attr name="shimmer_auto_start" format="boolean|reference"/>
-        <attr name="shimmer_angle" format="integer|reference"/>
-        <attr name="shimmer_mask_width" format="float|reference"/>
-        <attr name="shimmer_gradient_center_color_width" format="float|reference"/>
-        <attr name="shimmer_reverse_animation" format="boolean|reference"/>
+        <attr name="shimmer_color" format="color|reference" />
+        <attr name="shimmer_animation_duration" format="integer|reference" />
+        <attr name="shimmer_auto_start" format="boolean|reference" />
+        <attr name="shimmer_angle" format="integer|reference" />
+        <attr name="shimmer_mask_width" format="float|reference" />
+        <attr name="shimmer_gradient_center_color_width" format="float|reference" />
+        <attr name="shimmer_reverse_animation" format="boolean|reference" />
     </declare-styleable>
     <declare-styleable name="VyMovingImageView">
-        <attr name="move_speed" format="integer"/>
-        <attr name="auto_move" format="boolean"/>
+        <attr name="move_speed" format="integer" />
+        <attr name="auto_move" format="boolean" />
     </declare-styleable>
     <declare-styleable name="AngleImageView">
-        <attr name="angle" format="integer"/>
+        <attr name="angle" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="VoiceUiView">
+        <attr name="line_color" format="color|reference" />
+        <attr name="line_column_num" format="integer" />
     </declare-styleable>
 </resources>
