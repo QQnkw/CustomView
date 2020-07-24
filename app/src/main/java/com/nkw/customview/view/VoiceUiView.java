@@ -13,6 +13,7 @@ import android.view.animation.AccelerateInterpolator;
 
 import com.nkw.customview.R;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class VoiceUiView extends View {
@@ -132,7 +133,7 @@ public class VoiceUiView extends View {
         if (value > maxHeight) {
             value = maxHeight;
         }
-        mLineHeightList.add(0, value);
+        mLineHeightList.addFirst(value);
         mLineHeightList.removeLast();
         invalidate();
     }
@@ -141,15 +142,16 @@ public class VoiceUiView extends View {
      * 回到初始状态
      */
     public void resetLineHeight() {
+        final ArrayList<Float> cacheList = new ArrayList<>(mLineHeightList);
         ValueAnimator valueAnimator =
-                ValueAnimator.ofFloat(1, 0).setDuration(1000);
+                ValueAnimator.ofFloat(1, 0).setDuration(200);
         valueAnimator.setInterpolator(new AccelerateInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float animatedValue = (float) animation.getAnimatedValue();
-                for (int i = 0; i < mLineHeightList.size(); i++) {
-                    Float oldValue = mLineHeightList.get(i);
+                for (int i = 0; i < cacheList.size(); i++) {
+                    Float oldValue = cacheList.get(i);
                     float nowValue = oldValue * animatedValue;
                     mLineHeightList.set(i, nowValue);
                 }

@@ -11,6 +11,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -20,8 +22,9 @@ import com.nkw.customview.manager.VoiceRecorderManager;
 import com.nkw.customview.view.VoiceUiView;
 
 
-public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnClickListener {
+public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnClickListener, View.OnLongClickListener {
 
+    public static final String TAG = "VoiceUIAndRecorder";
     private VoiceRecorderManager mVoiceRecorderManager;
 
     public static void startActivity(BaseActivity activity) {
@@ -43,6 +46,7 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
         Button btnStart = findViewById(R.id.btn_start);
         Button btnCancel = findViewById(R.id.btn_cancel);
         Button btnStop = findViewById(R.id.btn_stop);
+        CustomButton btnVoice = findViewById(R.id.btn_voice);
         mVoiceRecorderManager = VoiceRecorderManager.getInstance();
         mVoiceRecorderManager.setVoiceFileDirPath(getExternalFilesDir(Environment.DIRECTORY_MUSIC).getAbsolutePath());
         mVoiceRecorderManager.setRecorderSateListener(new VoiceRecorderManager.RecorderSateListener() {
@@ -80,6 +84,7 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
         btnStart.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
         btnStop.setOnClickListener(this);
+        btnVoice.setOnLongClickListener(this);
     }
 
     @Override
@@ -139,5 +144,17 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
         if (resultCode == RESULT_OK && requestCode == 200) {
             checkPermission();
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        new VoiceDialog(this).show();
+        return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG,"onTouchEvent");
+        return super.onTouchEvent(event);
     }
 }

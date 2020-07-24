@@ -24,17 +24,18 @@
     </style>
 
     <style name="dialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowIsFloating">true</item>
         <!-- 设置未浮动窗口 -->
-        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
         <!-- 设置无边框 -->
-        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
         <!-- 设置无标题 -->
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
         <!-- 设置完全透明 -->
-        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <!-- 设置屏幕变暗 -->
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
+
     <style name="dialog_animation_bottom" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/slide_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/slide_bottom_out</item>
