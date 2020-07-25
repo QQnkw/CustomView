@@ -31,13 +31,10 @@
         android:layout_height="wrap_content"
         android:text="取消录音" />
 
-    <com.nkw.customview.activity.CustomButton
-        android:id="@+id/btn_voice"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/app_30transparent"
-        android:gravity="center"
-        android:text="点击发语音" />
+        android:layout_height="wrap_content"
+        android:text="-------------------------------------" />
 
     <TextView
         android:layout_width="match_parent"
@@ -142,4 +139,10 @@
             android:text="上一首" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_show_voice_ui"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="按住说话" />
 </LinearLayout>

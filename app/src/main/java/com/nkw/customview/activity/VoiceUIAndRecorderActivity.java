@@ -158,7 +158,6 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
         Button btnStartRecorder = findViewById(R.id.btn_start_recorder);
         Button btnCancelRecorder = findViewById(R.id.btn_cancel_recorder);
         Button btnStopRecorder = findViewById(R.id.btn_stop_recorder);
-        CustomButton btnVoice = findViewById(R.id.btn_voice);
         mVoiceRecorderManager = VoiceRecorderManager.getInstance();
         mVoiceRecorderManager.setVoiceFileDirPath(getExternalFilesDir(Environment.DIRECTORY_MUSIC).getAbsolutePath());
         mVoiceRecorderManager.setRecorderSateListener(new VoiceRecorderManager.RecorderSateListener() {
@@ -195,7 +194,6 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
         btnStartRecorder.setOnClickListener(this);
         btnCancelRecorder.setOnClickListener(this);
         btnStopRecorder.setOnClickListener(this);
-        btnVoice.setOnLongClickListener(this);
     }
 
     @Override
