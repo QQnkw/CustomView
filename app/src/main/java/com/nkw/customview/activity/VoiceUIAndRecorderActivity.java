@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -70,17 +69,18 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.d(TAG, "progress:" + progress + "fromUser:" + fromUser);
+                Log.d(TAG, "onProgressChanged-->progress:" + progress + "fromUser:" + fromUser);
+                mVoicePlayerManager.seekToPlay(progress);
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                Log.d(TAG, "onStartTrackingTouch");
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                Log.d(TAG, "onStopTrackingTouch");
             }
         });
         btnStartMusic.setOnClickListener(this);
@@ -149,6 +149,8 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
         musicList.add("http://ting6.yymp3.net:82/new27/dazhuan/1.mp3");
         musicList.add("http://ting6.yymp3.net:82/new27/gdys/1.mp3");
         musicList.add("http://ting6.yymp3.net:82/new27/mljyyj/1.mp3");
+        //测试错误语音
+        musicList.add("http://ting6.yymp3.net:82");
         mVoicePlayerManager.setPlayNetVoiceSource(musicList);
     }
 
@@ -215,10 +217,10 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
                 mVoicePlayerManager.pausePlay();
                 break;
             case R.id.btn_stop_music:
-                mVoicePlayerManager.stopPlay();
+                mVoicePlayerManager.releasePlayer();
                 break;
             case R.id.btn_reset_music:
-                mVoicePlayerManager.resetPlay();
+                mVoicePlayerManager.stopPlay();
                 break;
             case R.id.btn_next_music:
                 mVoicePlayerManager.nextPlay();
@@ -280,15 +282,9 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        Log.d(TAG, "onTouchEvent");
-        return super.onTouchEvent(event);
-    }
-
-    @Override
     protected void onStop() {
         super.onStop();
         mVoiceRecorderManager.stopRecorder();
-        mVoicePlayerManager.stopPlay();
+        mVoicePlayerManager.releasePlayer();
     }
 }

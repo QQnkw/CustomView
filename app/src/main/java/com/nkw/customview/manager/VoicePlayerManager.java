@@ -42,7 +42,7 @@ public class VoicePlayerManager {
     public static int PLAY_STATUS_PLAYING = 1;//正在播放
     public static int PLAY_STATUS_PAUSE = 2;//暂停播放
     public static int PLAY_STATUS_COMPLETE = 3;//播放完成
-    public static int PLAY_STATUS_RESET = 4;//重置
+    public static int PLAY_STATUS_STOP = 4;//重置
     public static int PLAY_STATUS_ERROR = 5;//错误
     public static int PLAY_STATUS_PREPARE_SUCCESS = 6;//准备完成
     //播放初始状态
@@ -88,9 +88,11 @@ public class VoicePlayerManager {
             mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-                    mPlayStatus = PLAY_STATUS_COMPLETE;
-                    if (mVoicePlayerStatusListener != null) {
-                        mVoicePlayerStatusListener.onStatusChange(PLAY_STATUS_COMPLETE);
+                    if (mPlayStatus != PLAY_STATUS_ERROR) {
+                        mPlayStatus = PLAY_STATUS_COMPLETE;
+                        if (mVoicePlayerStatusListener != null) {
+                            mVoicePlayerStatusListener.onStatusChange(PLAY_STATUS_COMPLETE);
+                        }
                     }
                 }
             });
@@ -107,6 +109,8 @@ public class VoicePlayerManager {
                     if (mPlayStatus == PLAY_STATUS_CHANGE_VOICE) {
                         mPlayStatus = PLAY_STATUS_PREPARE_SUCCESS;
                         startPlay();
+                    } else if (mPlayStatus == PLAY_STATUS_NORMAL) {
+                        mPlayStatus = PLAY_STATUS_PREPARE_SUCCESS;
                     }
                 }
             });
@@ -114,7 +118,7 @@ public class VoicePlayerManager {
             mMediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
                 @Override
                 public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                    if (mVoicePlayerStatusListener != null) {
+                    if (mVoicePlayerStatusListener != null && mPlayStatus != PLAY_STATUS_STOP) {
                         mVoicePlayerStatusListener.onPreparedPositionChange(percent);
                     }
                 }
@@ -123,7 +127,9 @@ public class VoicePlayerManager {
             mMediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
                 @Override
                 public void onSeekComplete(MediaPlayer mp) {
-                    if (mPlayStatus == PLAY_STATUS_RESET) {
+                    Log.d(TAG, "onSeekComplete");
+                    //拖拽处缓冲完成,可以播放
+                   /* if (mPlayStatus == PLAY_STATUS_RESET) {
                         //拖拽前是重置
                         loadPlaySource();
                     } else if (mPlayStatus == PLAY_STATUS_PAUSE) {
@@ -131,7 +137,7 @@ public class VoicePlayerManager {
                         startPlay();
                     } else if (mPlayStatus == PLAY_STATUS_PLAYING) {
                         //拖拽前就是播放状态
-                    }
+                    }*/
                 }
             });
             //设置播放错误监听
@@ -164,6 +170,7 @@ public class VoicePlayerManager {
             mVoicePlayerStatusListener.onPlayName(mNetVoiceSourceList.get(mNowPlayIndex));
             mVoicePlayerStatusListener.onPlayPositionChanged(0);
             mVoicePlayerStatusListener.onPreparedPositionChange(0);
+            mVoicePlayerStatusListener.onPlayTotalDuration(0);
         }
         initMediaPlayer();
         try {
@@ -181,12 +188,22 @@ public class VoicePlayerManager {
      * 开始播放
      */
     public void startPlay() {
-        if (mMediaPlayer != null && (mPlayStatus == PLAY_STATUS_PREPARE_SUCCESS || mPlayStatus == PLAY_STATUS_PAUSE)) {
+        if (mMediaPlayer != null &&
+                (mPlayStatus == PLAY_STATUS_PREPARE_SUCCESS || mPlayStatus == PLAY_STATUS_PAUSE || mPlayStatus == PLAY_STATUS_COMPLETE)) {
+            //老的状态为准备成功或者暂停时,或播放完毕时
             mMediaPlayer.start();
             mPlayStatus = PLAY_STATUS_PLAYING;
             if (mVoicePlayerStatusListener != null) {
                 mVoicePlayerStatusListener.onStatusChange(PLAY_STATUS_PLAYING);
             }
+        }
+        if (mMediaPlayer != null && mPlayStatus == PLAY_STATUS_STOP) {
+            mPlayStatus = PLAY_STATUS_CHANGE_VOICE;
+            if (mVoicePlayerStatusListener != null) {
+                mVoicePlayerStatusListener.onStatusChange(PLAY_STATUS_CHANGE_VOICE);
+            }
+            //老状态为停止时
+            mMediaPlayer.prepareAsync();
         }
     }
 
@@ -206,23 +223,24 @@ public class VoicePlayerManager {
     /**
      * 重置
      */
-    public void resetPlay() {
+    public void stopPlay() {
         if (mMediaPlayer != null && (mPlayStatus == PLAY_STATUS_PLAYING || mPlayStatus ==
-                PLAY_STATUS_PAUSE)) {
-            mMediaPlayer.reset();
-            mPlayStatus = PLAY_STATUS_RESET;
+                PLAY_STATUS_PAUSE || mPlayStatus == PLAY_STATUS_COMPLETE)) {
+            mMediaPlayer.stop();
+            mPlayStatus = PLAY_STATUS_STOP;
             if (mVoicePlayerStatusListener != null) {
-                mVoicePlayerStatusListener.onStatusChange(PLAY_STATUS_RESET);
+                mVoicePlayerStatusListener.onStatusChange(PLAY_STATUS_STOP);
+                mVoicePlayerStatusListener.onPlayPositionChanged(0);
+                mVoicePlayerStatusListener.onPreparedPositionChange(0);
             }
         }
     }
 
     /**
-     * 停止,释放资源
+     * 释放资源
      */
-    public void stopPlay() {
+    public void releasePlayer() {
         if (mMediaPlayer != null) {
-            mMediaPlayer.stop();
             mMediaPlayer.release();
             mMediaPlayer = null;
             stopUpdatingCallbackWithPosition();
@@ -238,8 +256,11 @@ public class VoicePlayerManager {
      * 拖拽到指定位置
      */
     public void seekToPlay(int position) {
-        if (mMediaPlayer != null && (mPlayStatus == PLAY_STATUS_PLAYING || mPlayStatus == PLAY_STATUS_PAUSE || mPlayStatus == PLAY_STATUS_RESET)) {
-            mMediaPlayer.seekTo(position);
+        if (mMediaPlayer != null &&
+                (mPlayStatus == PLAY_STATUS_PLAYING || mPlayStatus == PLAY_STATUS_PAUSE
+                        || mPlayStatus == PLAY_STATUS_COMPLETE)) {
+            int nowMsec = mTotalDuration * position / 100;
+            mMediaPlayer.seekTo(nowMsec);
         }
     }
 
@@ -297,6 +318,7 @@ public class VoicePlayerManager {
         if (mNowPlayIndex >= mNetVoiceSourceList.size()) {
             mNowPlayIndex = 0;
         }
+        mPlayStatus = PLAY_STATUS_CHANGE_VOICE;
         if (mVoicePlayerStatusListener != null) {
             mVoicePlayerStatusListener.onStatusChange(PLAY_STATUS_CHANGE_VOICE);
         }
@@ -306,8 +328,10 @@ public class VoicePlayerManager {
     // 上一首
     public void prePlay() {
         mNowPlayIndex--;
-        if (mNowPlayIndex < 0)
+        if (mNowPlayIndex < 0) {
             mNowPlayIndex = mNetVoiceSourceList.size() - 1;
+        }
+        mPlayStatus = PLAY_STATUS_CHANGE_VOICE;
         if (mVoicePlayerStatusListener != null) {
             mVoicePlayerStatusListener.onStatusChange(PLAY_STATUS_CHANGE_VOICE);
         }

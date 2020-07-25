@@ -39,6 +39,11 @@
         android:gravity="center"
         android:text="点击发语音" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="拖拽播放进度" />
+
     <SeekBar
         android:id="@+id/seekBar"
         android:layout_width="match_parent"
