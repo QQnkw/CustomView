@@ -99,7 +99,7 @@ public class VoiceRecorderManager {
             }
             //录音时长
             mCountTime = 0;
-            mHandler.sendEmptyMessageDelayed(CODE_TIME,1000);
+            mHandler.sendEmptyMessageDelayed(CODE_TIME, 1000);
             //线程控制器
             isRecording = true;
             new Thread(new Runnable() {
@@ -116,12 +116,12 @@ public class VoiceRecorderManager {
                             SystemClock.sleep(100);
                         }
                     } catch (Exception e) {
-                        Log.d(TAG, e.toString());
+                        Log.e(TAG, e.toString());
                     }
                 }
             }).start();
         } catch (Exception e) {
-            Log.d(TAG, e.toString());
+            Log.e(TAG, e.toString());
         }
     }
 
@@ -143,7 +143,16 @@ public class VoiceRecorderManager {
                 }
             }
         } catch (IllegalStateException e) {
-            Log.d(TAG, e.toString());
+            Log.e(TAG, e.toString());
+            if (mMediaRecorder != null) {
+                mMediaRecorder.reset();
+                mMediaRecorder.release();
+                mMediaRecorder = null;
+            }
+            File file = new File(mVoiceFilePath);
+            if (file.exists()) {
+                file.delete();
+            }
         }
         isRecording = false;
         mHandler.removeCallbacksAndMessages(null);
@@ -173,7 +182,16 @@ public class VoiceRecorderManager {
                 }
             }
         } catch (IllegalStateException e) {
-            Log.d(TAG, e.toString());
+            Log.e(TAG, e.toString());
+            if (mMediaRecorder != null) {
+                mMediaRecorder.reset();
+                mMediaRecorder.release();
+                mMediaRecorder = null;
+            }
+            File file = new File(mVoiceFilePath);
+            if (file.exists()) {
+                file.delete();
+            }
         }
         isRecording = false;
         mHandler.removeCallbacksAndMessages(null);

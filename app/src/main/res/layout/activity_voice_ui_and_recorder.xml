@@ -14,28 +14,127 @@
         android:layout_gravity="center" />
 
     <Button
-        android:id="@+id/btn_start"
+        android:id="@+id/btn_start_recorder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="开始录音" />
 
     <Button
-        android:id="@+id/btn_stop"
+        android:id="@+id/btn_stop_recorder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="停止录音" />
 
     <Button
-        android:id="@+id/btn_cancel"
+        android:id="@+id/btn_cancel_recorder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="取消录音" />
 
     <com.nkw.customview.activity.CustomButton
-        android:gravity="center"
-        android:background="@color/app_30transparent"
         android:id="@+id/btn_voice"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/app_30transparent"
+        android:gravity="center"
         android:text="点击发语音" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="播放进度" />
+
+    <ProgressBar
+        android:id="@+id/play_progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="缓存进度" />
+
+    <ProgressBar
+        android:id="@+id/prepare_progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_song_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="歌名" />
+
+        <TextView
+            android:id="@+id/tv_song_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="时间" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_start_music"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="播放音乐" />
+
+        <Button
+            android:id="@+id/btn_pause_music"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="暂停音乐" />
+
+        <Button
+            android:id="@+id/btn_stop_music"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="停止音乐" />
+
+        <Button
+            android:id="@+id/btn_reset_music"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="重置音乐" />
+
+        <Button
+            android:id="@+id/btn_next_music"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="下一首" />
+
+        <Button
+            android:id="@+id/btn_pre_music"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="上一首" />
+    </LinearLayout>
+
 </LinearLayout>

@@ -28,8 +28,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".activity.VoiceUIAndRecorderActivity"></activity>
+        android:networkSecurityConfig="@xml/network_permission_config">
+        <activity android:name=".activity.VoiceUIAndRecorderActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -52,19 +52,7 @@
         <activity
             android:name=".activity.WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:hardwareAccelerated="true"></activity>
-        <activity
-            android:name="com.tencent.smtt.sdk.VideoActivity"
-            android:alwaysRetainTaskState="true"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:exported="false"
-            android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="com.tencent.smtt.tbs.video.PLAY" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:hardwareAccelerated="true"/>
         <activity android:name=".activity.DragActivity" />
         <activity android:name=".activity.BarrageGroupViewActivity" />
         <activity android:name=".activity.CustomLayoutManagerActivity" />
@@ -72,7 +60,7 @@
         <activity android:name=".activity.camera.CustomCameraActivity" />
         <activity
             android:name=".activity.camera.Camera1Activity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.camera.Camera2Activity" />
         <activity android:name=".activity.SmallWidgetActivity" />
     </application>

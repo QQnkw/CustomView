@@ -15,6 +15,7 @@ import com.nkw.customview.R;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class VoiceUiView extends View {
 
@@ -32,8 +33,8 @@ public class VoiceUiView extends View {
     private float mColumnWidth;
     //线的画笔
     private Paint mPaint;
-    //最大音量
-    private float mMaxVolume = 200;
+    //自动标志
+    private boolean isAutoRefresh = false;
 
     public VoiceUiView(Context context) {
         this(context, null);
@@ -79,20 +80,14 @@ public class VoiceUiView extends View {
         } else {
             mMeasureWidth = MeasureSpec.getSize(widthMeasureSpec);
         }
+        //包裹类型时高度是画笔宽度的倍数
+        mMeasureHeight = (int) (mColumnWidth * 10);
+        //设置大小
+        setMeasuredDimension(mMeasureWidth, mMeasureHeight);
         //计算每列的宽度,因为中间有间隙,这里让间隙和列等宽
         mColumnWidth = mMeasureWidth / (mLineColumnNum * 2.0F);
         //设置画笔宽度
         mPaint.setStrokeWidth(mColumnWidth);
-
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        if (heightMode != MeasureSpec.EXACTLY) {
-            //包裹类型时高度是画笔宽度的倍数
-            mMeasureHeight = (int) (mColumnWidth * 10);
-        } else {
-            mMeasureHeight = MeasureSpec.getSize(heightMeasureSpec);
-        }
-        //设置大小
-        setMeasuredDimension(mMeasureWidth, mMeasureHeight);
         if (mLineHeightList == null) {
             mLineHeightList = new LinkedList<>();
             for (int i = 0; i < mLineColumnNum; i++) {
@@ -142,6 +137,7 @@ public class VoiceUiView extends View {
      * 回到初始状态
      */
     public void resetLineHeight() {
+        isAutoRefresh = false;
         final ArrayList<Float> cacheList = new ArrayList<>(mLineHeightList);
         ValueAnimator valueAnimator =
                 ValueAnimator.ofFloat(1, 0).setDuration(200);
@@ -159,5 +155,25 @@ public class VoiceUiView extends View {
             }
         });
         valueAnimator.start();
+    }
+
+    /**
+     * 自动刷新数据
+     */
+    public void autoRefreshData() {
+        isAutoRefresh = true;
+        final Random random = new Random();
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (isAutoRefresh) {
+                    float percentage = (random.nextInt(100) + 1) / 100F;
+                    setLineData(percentage);
+                    postDelayed(this, 100);
+                } else {
+                    removeCallbacks(this);
+                }
+            }
+        }, 100);
     }
 }
