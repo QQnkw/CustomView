@@ -1,8 +1,10 @@
 package com.nkw.customview.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -27,7 +29,7 @@ import com.nkw.customview.view.VoiceUiView;
 import java.util.ArrayList;
 
 
-public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnClickListener, View.OnLongClickListener {
+public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String TAG = "VoiceUIAndRecorder";
     private VoiceRecorderManager mVoiceRecorderManager;
@@ -61,6 +63,7 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
         Button btnResetMusic = findViewById(R.id.btn_reset_music);
         Button btnNextMusic = findViewById(R.id.btn_next_music);
         Button btnPreMusic = findViewById(R.id.btn_pre_music);
+        Button btnVoiceOutputChange = findViewById(R.id.btn_voice_output_change);
         final TextView tvSongName = findViewById(R.id.tv_song_name);
         final TextView tvSongTime = findViewById(R.id.tv_song_time);
         SeekBar seekBar = findViewById(R.id.seekBar);
@@ -89,6 +92,7 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
         btnResetMusic.setOnClickListener(this);
         btnNextMusic.setOnClickListener(this);
         btnPreMusic.setOnClickListener(this);
+        btnVoiceOutputChange.setOnClickListener(this);
         mVoicePlayerManager = VoicePlayerManager.getInstance();
         mVoicePlayerManager.setVoicePlayerStatusListener(new VoicePlayerManager.VoicePlayerStatusListener() {
             @Override
@@ -226,7 +230,51 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
             case R.id.btn_pre_music:
                 mVoicePlayerManager.prePlay();
                 break;
+            case R.id.btn_voice_output_change:
+                Button button = (Button) v;
+                /*切换需要权限MODIFY_AUDIO_SETTINGS*/
+                if (isEarpiecePlay) {
+                    changeToNormalPlay();
+                    isEarpiecePlay = false;
+                    button.setText("正常播放");
+                } else {
+                    changeToEarpiecePlay();
+                    isEarpiecePlay = true;
+                    button.setText("听筒播放");
+                }
+                break;
         }
+    }
+
+    private boolean isEarpiecePlay = false;
+
+    /**
+     * 切换到听筒
+     * 1.短的语音本来就短,切换重播几乎不受影响
+     * 2.长得音乐一般不会用听筒听
+     * 3.不是所有的手机都会出现卡顿)
+     */
+    public void changeToEarpiecePlay() {
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setSpeakerphoneOn(false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        } else {
+            audioManager.setMode(AudioManager.MODE_IN_CALL);
+        }
+    }
+
+    /**
+     * 切换回正常播放
+     * (听筒和正常播放切换会有卡段丢失部分音频问题,
+     * 1.短的语音本来就短,切换重播几乎不受影响
+     * 2.长得音乐一般不会用听筒听
+     * 3.不是所有的手机都会出现卡顿)
+     */
+    public void changeToNormalPlay() {
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setSpeakerphoneOn(false);
+        audioManager.setMode(AudioManager.MODE_NORMAL);
     }
 
     /**
@@ -271,12 +319,6 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
         if (resultCode == RESULT_OK && requestCode == 200) {
             checkPermission();
         }
-    }
-
-    @Override
-    public boolean onLongClick(View v) {
-        new VoiceDialog(this).show();
-        return false;
     }
 
     @Override

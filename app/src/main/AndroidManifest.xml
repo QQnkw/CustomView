@@ -17,19 +17,19 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
-
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_permission_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:networkSecurityConfig="@xml/network_permission_config">
-        <activity android:name=".activity.VoiceUIAndRecorderActivity"/>
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.VoiceUIAndRecorderActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -52,7 +52,7 @@
         <activity
             android:name=".activity.WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:hardwareAccelerated="true"/>
+            android:hardwareAccelerated="true" />
         <activity android:name=".activity.DragActivity" />
         <activity android:name=".activity.BarrageGroupViewActivity" />
         <activity android:name=".activity.CustomLayoutManagerActivity" />
@@ -60,7 +60,7 @@
         <activity android:name=".activity.camera.CustomCameraActivity" />
         <activity
             android:name=".activity.camera.Camera1Activity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.camera.Camera2Activity" />
         <activity android:name=".activity.SmallWidgetActivity" />
     </application>

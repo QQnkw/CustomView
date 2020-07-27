@@ -111,18 +111,24 @@
             android:text="暂停音乐" />
 
         <Button
-            android:id="@+id/btn_stop_music"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="停止音乐" />
-
-        <Button
             android:id="@+id/btn_reset_music"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="重置音乐" />
+
+        <Button
+            android:id="@+id/btn_stop_music"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="停止音乐" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_next_music"
@@ -137,6 +143,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="上一首" />
+
+        <Button
+            android:id="@+id/btn_voice_output_change"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="正常播放" />
     </LinearLayout>
 
     <Button
