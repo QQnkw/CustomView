@@ -59,7 +59,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 CameraActivity.startActivity(mActivity);
                 break;
             case R.id.btn_voice_ui:
-                VoiceUIAndRecorderActivity.startActivity(mActivity);
+//                VoiceUIAndRecorderActivity.startActivity(mActivity);
+                TestActivity.startActivity(mActivity);
                 break;
         }
     }
