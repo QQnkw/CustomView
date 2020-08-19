@@ -153,6 +153,7 @@ public class VoiceUIAndRecorderActivity extends BaseActivity implements View.OnC
         musicList.add("http://ting6.yymp3.net:82/new27/dazhuan/1.mp3");
         musicList.add("http://ting6.yymp3.net:82/new27/gdys/1.mp3");
         musicList.add("http://ting6.yymp3.net:82/new27/mljyyj/1.mp3");
+        musicList.add("https://a1.easemob.com/1103190624107805/tazai/chatfiles/7b665150-dddf-11ea-85c8-39eeddec64ae");
         //测试错误语音
         musicList.add("http://ting6.yymp3.net:82");
         mVoicePlayerManager.setPlayNetVoiceSource(musicList);

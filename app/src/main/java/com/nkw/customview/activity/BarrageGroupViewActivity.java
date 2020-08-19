@@ -3,9 +3,9 @@ package com.nkw.customview.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ClipDrawable;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.nkw.customview.R;
@@ -15,18 +15,30 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import butterknife.BindView;
+
 public class BarrageGroupViewActivity extends BaseActivity {
 
+    @BindView(R.id.iv)
+    ImageView mIv;
+    @BindView(R.id.bgv)
+    BarrageGroupView mBgv;
+    @BindView(R.id.ll)
+    FrameLayout mLl;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        BarrageGroupView bgv = findViewById(R.id.bgv);
+    public int getLayoutId() {
+        return R.layout.activity_barrage_group_view;
+    }
+
+    @Override
+    protected void initViewSet() {
         ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             list.add("第" + i + "个弹幕");
         }
-        bgv.setDataList(list);
-        bgv.startBarrage();
+        mBgv.setDataList(list);
+        mBgv.startBarrage();
         ImageView imageview = (ImageView) findViewById(R.id.iv);
         //获取图片所显示的ClipDrawble对象
         final ClipDrawable drawable = (ClipDrawable) imageview.getDrawable();
@@ -51,11 +63,6 @@ public class BarrageGroupViewActivity extends BaseActivity {
                 }
             }
         }, 0, 50);
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_barrage_group_view;
     }
 
     public static void startActivity(Context context) {

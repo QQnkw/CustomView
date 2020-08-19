@@ -29,7 +29,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.TestActivity"></activity>
+        <activity android:name=".activity.TigerGameActivity"></activity>
+        <activity android:name=".activity.LikeWXRecorderActivity" />
         <activity android:name=".activity.VoiceUIAndRecorderActivity" />
 
         <provider

@@ -1,4 +1,4 @@
-package com.nkw.customview.activity;
+package com.nkw.customview.view.recorder;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 import com.nkw.customview.R;
 
+/**
+ * 模仿微信发送语音的布局
+ */
 public class RecordConstraintLayout extends ConstraintLayout {
 
     private Path mPath;

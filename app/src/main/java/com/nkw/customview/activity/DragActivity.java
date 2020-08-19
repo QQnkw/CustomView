@@ -7,8 +7,11 @@ import android.widget.ImageView;
 
 import com.nkw.customview.R;
 
+import butterknife.BindView;
+
 public class DragActivity extends BaseActivity {
 
+    @BindView(R.id.iv)
     private ImageView mImageView;
 
     @Override
@@ -22,8 +25,6 @@ public class DragActivity extends BaseActivity {
 
     @Override
     protected void initViewSet() {
-        super.initViewSet();
-        mImageView = findViewById(R.id.iv);
         findViewById(R.id.btn_show_hide).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,9 +1,7 @@
 package com.nkw.customview.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,35 +17,36 @@ import com.nkw.customview.view.DiamondLayoutManager;
 
 import java.util.Random;
 
-public class CustomLayoutManagerActivity extends AppCompatActivity {
+import butterknife.BindView;
 
+public class CustomLayoutManagerActivity extends BaseActivity {
+
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
     private Random mRandom;
 
     public static void startActivity(BaseActivity activity) {
-        activity.startActivity(new Intent(activity,CustomLayoutManagerActivity.class));
+        activity.startActivity(new Intent(activity, CustomLayoutManagerActivity.class));
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custom_layout_manager);
-        final RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new DiamondLayoutManager());
+    protected void initViewSet() {
+        mRecyclerView.setLayoutManager(new DiamondLayoutManager());
         mRandom = new Random();
-        recyclerView.setAdapter(new RecyclerView.Adapter<VhImageHolder>() {
+        mRecyclerView.setAdapter(new RecyclerView.Adapter<VhImageHolder>() {
             @NonNull
             @Override
             public VhImageHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                Log.d("NKW--->","onCreateViewHolder");
+                Log.d("NKW--->", "onCreateViewHolder");
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_custom_layout_manager, parent, false);
-                int width = recyclerView.getWidth() / 2;
-                return new VhImageHolder(view,width);
+                int width = mRecyclerView.getWidth() / 2;
+                return new VhImageHolder(view, width);
             }
 
             @Override
             public void onBindViewHolder(@NonNull VhImageHolder holder, int position) {
-                Log.d("NKW--->","onBindViewHolder");
-                holder.mTv.setText(position+"");
+                Log.d("NKW--->", "onBindViewHolder");
+                holder.mTv.setText(position + "");
                 int i = mRandom.nextInt(10);
                 holder.mIv.setImageResource(R.mipmap.pic);
                 GlideUtils.loadImage(CustomLayoutManagerActivity.this, AppLocalData.imgUrlArr[i], holder.mIv);
@@ -60,9 +59,14 @@ public class CustomLayoutManagerActivity extends AppCompatActivity {
         });
     }
 
-    private static class VhImageHolder extends RecyclerView.ViewHolder{
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_custom_layout_manager;
+    }
 
-        TextView        mTv;
+    private static class VhImageHolder extends RecyclerView.ViewHolder {
+
+        TextView mTv;
         CustomImageView mIv;
 
         public VhImageHolder(View itemView, int width) {

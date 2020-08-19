@@ -1,4 +1,4 @@
-package com.nkw.customview.activity;
+package com.nkw.customview.view.recorder;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
