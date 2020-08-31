@@ -65,9 +65,10 @@
             android:layout_height="wrap_content"
             android:text="自定义相机" />
 
-        <FrameLayout
-            android:id="@+id/fl"
+        <Button
+            android:id="@+id/btn_tiger"
             android:layout_width="match_parent"
-            android:layout_height="100dp" />
+            android:layout_height="wrap_content"
+            android:text="老虎机效果" />
     </LinearLayout>
 </ScrollView>

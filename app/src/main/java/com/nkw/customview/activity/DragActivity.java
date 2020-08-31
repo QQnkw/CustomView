@@ -12,7 +12,7 @@ import butterknife.BindView;
 public class DragActivity extends BaseActivity {
 
     @BindView(R.id.iv)
-    private ImageView mImageView;
+    ImageView mImageView;
 
     @Override
     public int getLayoutId() {
