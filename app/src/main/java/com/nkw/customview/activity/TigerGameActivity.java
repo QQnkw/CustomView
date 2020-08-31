@@ -67,7 +67,6 @@ public class TigerGameActivity extends BaseActivity {
     public void onViewClicked() {
         mIvTigerBg.setImageResource(R.drawable.tiger_game_after_bg);
         ((AnimationDrawable) mIvTigerBg.getDrawable()).start();
-
         int newNum = mRandom.nextInt(9999) + 1;
         String numStr = String.valueOf(newNum);
         mTvNum.setText(numStr);
@@ -117,5 +116,11 @@ public class TigerGameActivity extends BaseActivity {
         wheel.setCyclic(true);
         wheel.setEnabled(false);
         wheel.setDrawShadows(false);
+    }
+
+    @Override
+    protected void onDestroy() {
+        ((AnimationDrawable) mIvTigerBg.getDrawable()).stop();
+        super.onDestroy();
     }
 }
