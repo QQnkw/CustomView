@@ -18,7 +18,6 @@ import com.nkw.customview.R;
 import com.nkw.customview.activity.BaseActivity;
 import com.nkw.customview.utils.PhotoBitmapUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
